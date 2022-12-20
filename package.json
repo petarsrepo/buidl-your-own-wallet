@@ -1,0 +1,19 @@
+{
+  "name": "web3js-wallet-management",
+  "version": "0.1.0",
+  "main": "create.js",
+  "scripts": {
+    "create": "node create",
+    "balance": "node balance",
+    "encrypt": "node encrypt",
+    "decrypt": "node decrypt"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "web3": "^1.8.1"
+  },
+  "devDependencies": {},
+  "description": "A compilation of scripts to perform basic Web3 wallet management functions - create, check balance, encrypt private key to JSON, and decrypt private key to JSON."
+}
