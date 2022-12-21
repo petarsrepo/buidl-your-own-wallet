@@ -15,23 +15,13 @@
         margin: 0;
       }
     </style>
-          <script src="test.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <!-- function runScripts() {
-      spawn('node', ['create.js']);
-      spawn('node', ['balance.js']);
-    } -->
-       <!-- <script type="text/javascript">
-// import { spawn } from ('child_process');
-//       function runScripts() {
-//         spawn('node', ['create.js']);
-//         spawn('node', ['balance.js']);
-//       } -->
-    <!-- </script> -->
   </head>
     <body>
-      <form action="/pages/create" method="GET">
-  <button id="create" onclick="loadCreate()">Create wallet</button>
+
+<!-- add triggers and on-click actions  -->
+<form action="/pages/create" method="GET">
+<button id="create" onclick="loadCreate()">Create wallet</button>
 </form>
 <form action="/pages/balance" method="GET">
 <button id="balance" onclick="loadBalance()">Check balance</button>
@@ -42,6 +32,8 @@
 <form action="/pages/decrypt" method="GET">
 <button id="decrypt" onclick="loadDecrypt()">Decrypt JSON keystore to private key</button>
 </form>
+
+<!-- add on-click button html changes  -->
 <script>
 function loadCreate() {
   document.getElementById("create").innerHTML = "Generating wallet keys, please wait...";
