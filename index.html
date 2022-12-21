@@ -23,6 +23,11 @@
 <form action="/pages/create" method="GET">
 <button id="create" onclick="loadCreate()">Create wallet</button>
 </form>
+<form action="/pages/addkey" method="POST">
+<input id="newkey" name="newkey" value="Enter wallet private key here" maxlength="66"></input>
+<button id="addkey" onclick="loadAddkey()">Add private key</button>
+</form>
+<button id="reload" onclick="location.reload()" style="display:none">Unlock input</button>
 <form action="/pages/balance" method="GET">
 <button id="balance" onclick="loadBalance()">Check balance</button>
 </form>
@@ -39,6 +44,15 @@ function loadCreate() {
   document.getElementById("create").innerHTML = "Generating wallet keys, please wait...";
   setTimeout(() => {
   document.getElementById("create").innerHTML = "Create wallet";
+}, 2999)
+}
+</script>
+<script>
+function loadAddkey() {
+  document.getElementById("newkey").readOnly = false;
+  setTimeout(() => {
+  document.getElementById("addkey").disabled = true;
+  document.getElementById("reload").style.display = 'block';
 }, 2999)
 }
 </script>

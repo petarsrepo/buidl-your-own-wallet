@@ -44,6 +44,16 @@ setTimeout(() => {
   }, 3000)
 })
 
+// new
+app.post('/pages/addkey', (req, res) => {
+
+  fs.writeFileSync("./dls/newkey.json", req.body.newkey);
+  spawn('node', ['addkey.js']);
+setTimeout(() => {
+    res.sendFile('pages/addkey.html', {root: __dirname});
+      }, 3000)
+})
+
 app.get('/dls/keys.json', (req, res) => {
 res.download('dls/keys.json')
 });
