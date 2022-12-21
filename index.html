@@ -1,0 +1,78 @@
+<html data-arp-injected="true"><head>
+
+    <meta charset="UTF-8">
+
+    <style>
+      html {
+        /* Copyright issue, ask Deidre to create a new one*/
+        background: linear-gradient(
+            rgba(14, 92, 219, 0.7),
+            rgba(155, 101, 34, 0.7)
+          ),
+          url('https://thumbs.gfycat.com/ObviousLimpArgentinehornedfrog-size_restricted.gif');
+        background-size: cover;
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+          <script src="test.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <!-- function runScripts() {
+      spawn('node', ['create.js']);
+      spawn('node', ['balance.js']);
+    } -->
+       <!-- <script type="text/javascript">
+// import { spawn } from ('child_process');
+//       function runScripts() {
+//         spawn('node', ['create.js']);
+//         spawn('node', ['balance.js']);
+//       } -->
+    <!-- </script> -->
+  </head>
+    <body>
+      <form action="/create" method="GET">
+  <button id="create" onclick="loadCreate()">Create wallet</button>
+</form>
+<form action="/balance" method="GET">
+<button id="balance" onclick="loadBalance()">Check balance</button>
+</form>
+<form action="/encrypt" method="GET">
+<button id="encrypt" onclick="loadEncrypt()">Encrypt private key to JSON keystore</button>
+</form>
+<form action="/decrypt" method="GET">
+<button id="decrypt" onclick="loadDecrypt()">Decrypt JSON keystore to private key</button>
+</form>
+<script>
+function loadCreate() {
+  document.getElementById("create").innerHTML = "Generating wallet keys, please wait...";
+  setTimeout(() => {
+  document.getElementById("create").innerHTML = "Create wallet";
+}, 2999)
+}
+</script>
+<script>
+function loadBalance() {
+  document.getElementById("balance").innerHTML = "Fetching wallet balance, please wait...";
+  setTimeout(() => {
+  document.getElementById("balance").innerHTML = "Check balance";
+}, 2999)
+}
+</script>
+<script>
+function loadEncrypt() {
+  document.getElementById("encrypt").innerHTML = "Encrypting private key to JSON keystore, please wait...";
+  setTimeout(() => {
+  document.getElementById("encrypt").innerHTML = "Encrypt private key to JSON keystore";
+}, 2999)
+}
+</script>
+<script>
+function loadDecrypt() {
+  document.getElementById("decrypt").innerHTML = "Decrypting JSON keystore to private key, please wait...";
+  setTimeout(() => {
+  document.getElementById("decrypt").innerHTML = "Decrypt JSON keystore to private key";
+}, 2999)
+}
+</script>
+
+</body></html>

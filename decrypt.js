@@ -6,11 +6,12 @@ const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 async function decrypt() {
     const wallet = web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY)
     const decryptedJsonKey = await web3.eth.accounts.decrypt(
-        JSON.parse(fs.readFileSync("./.encryptedKeyStore.json")),
+        JSON.parse(fs.readFileSync("./dls/encryptedKeyStore.json")),
         process.env.PRIVATE_KEY_PASS
     )
     console.log(decryptedJsonKey)
-    fs.writeFileSync("./.decryptedKeyStore.json", JSON.stringify(decryptedJsonKey))
+    fs.writeFileSync("./dls/decryptedKeyStore.json", JSON.stringify(decryptedJsonKey))
+    fs.writeFileSync("./decrypt.html", JSON.stringify(decryptedJsonKey) + '<form action="/dls/decryptedKeyStore.json" method="GET">' + '<button id="decryptDL" onclick="loadDecryptDL()">Download</button>' + '</form>');
 }
 
 decrypt()

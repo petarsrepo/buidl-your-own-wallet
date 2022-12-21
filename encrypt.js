@@ -10,7 +10,8 @@ async function encrypt() {
         process.env.PRIVATE_KEY
     )
     console.log(encryptedJsonKey)
-    fs.writeFileSync("./.encryptedKeyStore.json", JSON.stringify(encryptedJsonKey))
+    fs.writeFileSync("./dls/encryptedKeyStore.json", JSON.stringify(encryptedJsonKey))
+    fs.writeFileSync("./encrypt.html", JSON.stringify(encryptedJsonKey) + '<form action="/dls/encryptedKeyStore.json" method="GET">' + '<button id="encryptDL" onclick="loadEncryptDL()">Download</button>' + '</form>');
 
 }
 
