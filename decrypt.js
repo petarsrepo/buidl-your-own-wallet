@@ -3,6 +3,7 @@ const fs = require("fs")
 require("dotenv").config()
 const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
+// prepare output
 async function decrypt() {
     const wallet = web3.eth.accounts.wallet.add(process.env.PRIVATE_KEY)
     const decryptedJsonKey = await web3.eth.accounts.decrypt(
@@ -10,7 +11,11 @@ async function decrypt() {
         process.env.PRIVATE_KEY_PASS
     )
     console.log(decryptedJsonKey)
+
+    // write as JSON for download
     fs.writeFileSync("./dls/decryptedKeyStore.json", JSON.stringify(decryptedJsonKey))
+
+    // write as page for web viewing
     fs.writeFileSync("./pages/decrypt.html", JSON.stringify(decryptedJsonKey) + '<form action="/dls/decryptedKeyStore.json" method="GET">' + '<button id="decryptDL" onclick="loadDecryptDL()">Download</button>' + '</form>');
 }
 
