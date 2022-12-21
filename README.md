@@ -2,6 +2,23 @@
 
 A compilation of scripts to perform basic Web3 wallet management functions - create, check balance, encrypt private key to JSON, and decrypt private key to JSON.
 
+## Overview
+The current implementation supports the following functions:
+- Create wallet
+- Check balance
+- Encrypt private key to JSON keystore
+- Decrypt JSON keystore to private key
+- Load external wallet with private key
+- Download every function output as JSON
+
+
+ ___`Coming soon`___
+- UI password entry
+- Sign and submit transactions
+- Gas estimation
+- Keystore file import
+- Network selection
+
 ## Prerequisites
 
 1. [Node.js](https://nodejs.org/en/)
