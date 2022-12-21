@@ -1,4 +1,4 @@
-# Web3.js wallet management
+# buidl-your-own-wallet
 
 A compilation of scripts to perform basic Web3 wallet management functions - create, check balance, encrypt private key to JSON, and decrypt private key to JSON.
 
