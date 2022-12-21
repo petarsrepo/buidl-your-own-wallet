@@ -15,5 +15,5 @@
     "web3": "^1.8.1"
   },
   "devDependencies": {},
-  "description": "A compilation of scripts to perform basic Web3 wallet management functions - create, check balance, encrypt private key to JSON, and decrypt private key to JSON."
+  "description": "A compilation of scripts to perform basic Web3 wallet management functions within a single interface. Create a wallet, check its balance, encrypt your private key to JSON keystore, and decrypt your JSON keystore to private key."
 }
