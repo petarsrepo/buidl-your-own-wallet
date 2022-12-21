@@ -5,7 +5,7 @@ const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 const keys = web3.eth.accounts.create();
 console.log(keys);
-fs.writeFileSync("./create.html", JSON.stringify(keys) + '<form action="/dls/keys.json" method="GET">' + '<button id="createDL" onclick="loadCreateDL()">Download</button>' + '</form>');
+fs.writeFileSync("./pages/create.html", JSON.stringify(keys) + '<form action="/dls/keys.json" method="GET">' + '<button id="createDL" onclick="loadCreateDL()">Download</button>' + '</form>');
 fs.writeFileSync("./dls/keys.json", JSON.stringify(keys));
 const endpointENV = "ENDPOINT=" + '"' + process.env.ENDPOINT + '"'
 const pkeyENV = "PRIVATE_KEY=" + '"' + keys.privateKey + '"'

@@ -11,7 +11,7 @@ async function decrypt() {
     )
     console.log(decryptedJsonKey)
     fs.writeFileSync("./dls/decryptedKeyStore.json", JSON.stringify(decryptedJsonKey))
-    fs.writeFileSync("./decrypt.html", JSON.stringify(decryptedJsonKey) + '<form action="/dls/decryptedKeyStore.json" method="GET">' + '<button id="decryptDL" onclick="loadDecryptDL()">Download</button>' + '</form>');
+    fs.writeFileSync("./pages/decrypt.html", JSON.stringify(decryptedJsonKey) + '<form action="/dls/decryptedKeyStore.json" method="GET">' + '<button id="decryptDL" onclick="loadDecryptDL()">Download</button>' + '</form>');
 }
 
 decrypt()

@@ -16,31 +16,31 @@ app.get('/', (req, res) => {
 // app.post('/game', function (req, res) {
 //     res.render('game', { name: req.body.name });
 // });
-app.get('/create', (req, res) => {
+app.get('/pages/create', (req, res) => {
 spawn('node', ['create.js'])
 setTimeout(() => {
-  res.sendFile('create.html', {root: __dirname})
+  res.sendFile('pages/create.html', {root: __dirname})
   }, 3000)
 })
 
-app.get('/balance', (req, res) => {
+app.get('/pages/balance', (req, res) => {
 spawn('node', ['balance.js'])
 setTimeout(() => {
-  res.sendFile('balance.html', {root: __dirname})
+  res.sendFile('pages/balance.html', {root: __dirname})
   }, 3000)
 })
 
-app.get('/encrypt', (req, res) => {
+app.get('/pages/encrypt', (req, res) => {
 spawn('node', ['encrypt.js'])
 setTimeout(() => {
-  res.sendFile('encrypt.html', {root: __dirname})
+  res.sendFile('pages/encrypt.html', {root: __dirname})
   }, 3000)
 })
 
-app.get('/decrypt', (req, res) => {
+app.get('/pages/decrypt', (req, res) => {
 spawn('node', ['decrypt.js'])
 setTimeout(() => {
-  res.sendFile('decrypt.html', {root: __dirname})
+  res.sendFile('pages/decrypt.html', {root: __dirname})
   }, 3000)
 })
 
