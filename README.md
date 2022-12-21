@@ -130,3 +130,29 @@ This will be reflected in the generated `/dls/decryptedKeyStore.json` file
 // /dls/decryptedKeyStore.json file output
 {"address":"0xYoUrPuBlIcKeYhErE","privateKey":"0xYoUrPrIvAtEkEyHeRe"}
 ```
+
+8. Load an externally-created wallet via private key import with the `Add private key` button. You can also download the output as a JSON file.
+
+```js
+// UI returns
+# {
+#   address: '0xYoUrPuBlIcKeYhErE',
+#   privateKey: '0xYoUrPrIvAtEkEyHeRe',
+# }
+```
+
+The script will also add the private key of your newly create wallet to the `.env` file automatically:
+
+```shell
+// .env file changes
+ENDPOINT="yOuR_eNdPoInT_URL_hErE"
+PRIVATE_KEY="0xYoUrPrIvAtEkEyHeRe"
+PRIVATE_KEY_PASS="undefined"
+```
+
+9. ___`Coming soon:`___
+- UI password entry
+- Sign and submit transactions
+- Gas estimation
+- Keystore file import
+- Network selection
