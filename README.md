@@ -1,6 +1,6 @@
 # buidl-your-own-wallet
 
-A compilation of scripts to perform basic Web3 wallet management functions - create, check balance, encrypt private key to JSON, and decrypt private key to JSON.
+A compilation of scripts to perform basic Web3 wallet management functions within a single interface. Create a wallet, check its balance, encrypt your private key to JSON keystore, and decrypt your JSON keystore to private key.
 
 ## Prerequisites
 
@@ -28,30 +28,27 @@ To use the functions within this script you will need a node `endpoint`. Get one
 ENDPOINT="yOuR_eNdPoInT_URL_hErE"
 ```
 
-2. Run the `create.js` script from your CLI by entering:
+2. Run the `index.js` script from your CLI and use the UI to perform the functions you need:
 
 ```shell
 // CLI
-node create
+node index
 ```
 
 or alternatively via `npm`:
 
 ```shell
 // CLI
-npm run create
+npm run start
 ```
 
-3. The `create.js` script will return the following:
+3. Create a new wallet by pressing the `Create wallet` button. You can also download the output as a JSON file.
 
-```shell
-// CLI script returns
+```js
+// UI returns
 # {
 #   address: '0xYoUrPuBlIcKeYhErE',
 #   privateKey: '0xYoUrPrIvAtEkEyHeRe',
-#   signTransaction: [Function: signTransaction],
-#   sign: [Function: sign],
-#   encrypt: [Function: encrypt]
 # }
 ```
 
@@ -66,22 +63,10 @@ PRIVATE_KEY_PASS="undefined"
 
 Note that unless you have set up a PRIVATE_KEY_PASS key and value in your `.env` file the script will automatically add a line about it with `undefined` as value.
 
-4. Run the `balance.js` script to check your balance:
+4. Check the balance of your wallet by clicking on the `Check balance` button. You can also download the output as a JSON file.
 
-```shell
-// CLI
-node balance
-```
-
-or alternatively via `npm`:
-
-```shell
-// CLI
-npm run balance
-```
-
-```shell
-// CLI script returns
+```js
+// UI returns
 # The balance of your wallet is: 20223750051062211493 wei
 # Balance in gwei: 20223750051.062211493 gwei
 # Balance in Ethers: 20.223750051062211493 ETH
@@ -96,83 +81,78 @@ PRIVATE_KEY="0xYoUrPrIvAtEkEyHeRe"
 PRIVATE_KEY_PASS="yOuRpAsSwOrDhErE"
 ```
 
-6. Run the `encrypt.js` script to encrypt your private key and export it as a protected `.encryptedKeyStore.json` file:
+6. Encrypt your private key to file with the `Encrypt private key to JSON keystore` button. You can also download the output as a JSON file.
 
-```shell
-// CLI
-node encrypt
-```
 
-or alternatively via `npm`:
-
-```shell
-// CLI
-npm run encrypt
-```
-
-The script should return an output similar to this:
-
-```shell
-// CLI script returns
+// UI returns
+```js
 # {
-#   version: 3,
-#   id: 'ace5ff1c-c971-4b8c-b066-e6215f7420d9',
-#   address: '224a67b1e8a6b6b0ccb5deec44919ad983c82b12',
-#   crypto: {
-#     ciphertext: '423964514ee7eb5ee8f7c4047836e5743d12715889787325cc65b26b2d42ab7c',
-#     cipherparams: { iv: 'b7b16712524da59ca7585bcd55263f4b' },
-#     cipher: 'aes-128-ctr',
-#     kdf: 'scrypt',
-#     kdfparams: {
-#       dklen: 32,
-#       salt: 'f99a05124ac9459d7fb045371bf975671e06f0125470c94990995e6e0a981312',
-#       n: 8192,
-#       r: 8,
-#       p: 1
-#     },
-#     mac: '888d45374904d553ce9ee60ee49a2c52829159322a36961e2bd5efb28dba58c3'
-#   }
+#  version: 3,
+#  id: 'ace5ff1c-c971-4b8c-b066-e6215f7420d9',
+#  address: '224a67b1e8a6b6b0ccb5deec44919ad983c82b12',
+#  crypto: {
+#    ciphertext: '423964514ee7eb5ee8f7c4047836e5743d12715889787325cc65b26b2d42ab7c',
+#    cipherparams: { iv: 'b7b16712524da59ca7585bcd55263f4b' },
+#    cipher: 'aes-128-ctr',
+#    kdf: 'scrypt',
+#    kdfparams: {
+#      dklen: 32,
+#      salt: 'f99a05124ac9459d7fb045371bf975671e06f0125470c94990995e6e0a981312',
+#      n: 8192,
+#      r: 8,
+#      p: 1
+#    },
+#    mac: '888d45374904d553ce9ee60ee49a2c52829159322a36961e2bd5efb28dba58c3'
+#  }
 # }
-
 ```
 
-This will be reflected in the generated `.encryptedKeyStore.json` file
+This will be reflected in the generated `/dls/encryptedKeyStore.json` file
 
-```shell
-// .encryptedKeyStore.json file output
+```js
+// /dls/encryptedKeyStore.json file output
 {"version":3,"id":"5b90f2fd-4eee-4979-a63d-82421f00ce3c","address":"a3d13afd97d3327e29178dbd8a1bc3fc639f363b","crypto":{"ciphertext":"1b69bc20f3b55ff3b4c32ebc0825c3c2d33daf1b1c080219db05fae9d806a0e6","cipherparams":{"iv":"773dd2ad24f0fb8973dd73184f0bf2b3"},"cipher":"aes-128-ctr","kdf":"scrypt","kdfparams":{"dklen":32,"salt":"5b49ecae1740ceef08686468a6179c1d154d7fea1997e1bada81050096cb042a","n":8192,"r":8,"p":1},"mac":"8a6f36122eec78348be94fa1352ecf28be0f875b92d64924e3708b34f2440114"}}
 ```
 
-7. Run the `decrypt.js` script to decrypt the `.encryptedKeyStore.json` file generated earlier and export the result to a `.decryptedKeyStore.json` file.
+7. Decrypt your JSON keystore file with the `Decrypt JSON keystore to private key` button. You can also download the output as a JSON file.
 
-```shell
-// CLI
-node decrypt
-```
-
-or alternatively via `npm`:
-
-```shell
-// CLI
-npm run decrypt
-```
-
-The script should return an output similar to this:
-
-```shell
+```js
 // CLI script returns
 # {
 #   address: '0xYoUrPuBlIcKeYhErE',
 #   privateKey: '0xYoUrPrIvAtEkEyHeRe',
-#   signTransaction: [Function: signTransaction],
-#   sign: [Function: sign],
-#   encrypt: [Function: encrypt]
 # }
 ```
 
-This will be reflected in the generated `.decryptedKeyStore.json` file
+This will be reflected in the generated `/dls/decryptedKeyStore.json` file
 
 ```shell
-// .decryptedKeyStore.json file output
+// /dls/decryptedKeyStore.json file output
 {"address":"0xYoUrPuBlIcKeYhErE","privateKey":"0xYoUrPrIvAtEkEyHeRe"}
 ```
+
+8. Load an externally-created wallet via private key import with the `Add private key` button. You can also download the output as a JSON file.
+
+```js
+// UI returns
+# {
+#   address: '0xYoUrPuBlIcKeYhErE',
+#   privateKey: '0xYoUrPrIvAtEkEyHeRe',
+# }
+```
+
+The script will also add the private key of your newly create wallet to the `.env` file automatically:
+
+```shell
+// .env file changes
+ENDPOINT="yOuR_eNdPoInT_URL_hErE"
+PRIVATE_KEY="0xYoUrPrIvAtEkEyHeRe"
+PRIVATE_KEY_PASS="undefined"
+```
+
+9. ___`Coming soon:`___
+- UI password entry
+- Sign and submit transactions
+- Gas estimation
+- Keystore file import
+- Network selection

@@ -1,10 +1,8 @@
 <html data-arp-injected="true"><head>
 
     <meta charset="UTF-8">
-
     <style>
       html {
-        /* Copyright issue, ask Deidre to create a new one*/
         background: linear-gradient(
             rgba(14, 92, 219, 0.7),
             rgba(155, 101, 34, 0.7)
@@ -21,8 +19,14 @@
 
 <!-- add triggers and on-click actions  -->
 <form action="/pages/create" method="GET">
+<input id="address" readonly="true" value="Click for last used address" onclick="loadAddress()"></input>
 <button id="create" onclick="loadCreate()">Create wallet</button>
 </form>
+<form action="/pages/addkey" method="POST">
+<input id="newkey" name="newkey" value="Enter wallet private key here" maxlength="66"></input>
+<button id="addkey" onclick="loadAddkey()">Add private key</button>
+</form>
+<button id="reload" onclick="location.reload()" style="display:none">Unlock input</button>
 <form action="/pages/balance" method="GET">
 <button id="balance" onclick="loadBalance()">Check balance</button>
 </form>
@@ -39,6 +43,15 @@ function loadCreate() {
   document.getElementById("create").innerHTML = "Generating wallet keys, please wait...";
   setTimeout(() => {
   document.getElementById("create").innerHTML = "Create wallet";
+}, 2999)
+}
+</script>
+<script>
+function loadAddkey() {
+  document.getElementById("newkey").readOnly = false;
+  setTimeout(() => {
+  document.getElementById("addkey").disabled = true;
+  document.getElementById("reload").style.display = 'block';
 }, 2999)
 }
 </script>
@@ -67,4 +80,16 @@ function loadDecrypt() {
 }
 </script>
 
+<!-- json-first key storage for compatibility -->
+<script src='/dls/keys.json'></script>
+<script>
+function loadAddress() {
+  fetch('./dls/keys.json')
+  .then((response) => response.json())
+  .then(function (json) {
+      var test = JSON.stringify(json.address);
+      document.getElementById("address").value = test.slice(1,43);
+    });
+}
+</script>
 </body></html>
