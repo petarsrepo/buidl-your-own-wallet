@@ -1,6 +1,8 @@
 # buidl-your-own-wallet
 
-A compilation of scripts to perform basic Web3 wallet management functions within a single interface. Create a wallet, check its balance, encrypt your private key to JSON keystore, and decrypt your JSON keystore to private key.
+A compilation of scripts to perform basic Web3 wallet management functions within a single interface. Create a wallet, check its balance, encrypt your private key to JSON keystore, and decrypt your JSON keystore to private key. Here's a quick demo walkthrough of the core functionality:
+
+![buidl-your-own-wallet-demo](https://user-images.githubusercontent.com/24898023/209030207-64ae8033-e129-4c61-9834-2f2b83b75af1.gif)
 
 ## Overview
 The current implementation supports the following functions:
