@@ -11,13 +11,13 @@ The current implementation supports the following functions:
 - Encrypt private key to JSON keystore
 - Decrypt JSON keystore to private key
 - Load external wallet with private key
+- Estimate transaction gas costs
 - Download every function output as JSON
 
 
  ___`Coming soon`___
 - UI password entry
 - Sign and submit transactions
-- Gas estimation
 - Keystore file import
 - Network selection
 
@@ -66,8 +66,8 @@ npm run start
 ```js
 // UI returns
 # {
-#   address: '0xYoUrPuBlIcKeYhErE',
-#   privateKey: '0xYoUrPrIvAtEkEyHeRe',
+#   "address": '0xYoUrPuBlIcKeYhErE',
+#   "privateKey": '0xYoUrPrIvAtEkEyHeRe',
 # }
 ```
 
@@ -106,20 +106,20 @@ PRIVATE_KEY_PASS="yOuRpAsSwOrDhErE"
 // UI returns
 ```js
 # {
-#  version: 3,
-#  id: 'ace5ff1c-c971-4b8c-b066-e6215f7420d9',
-#  address: '224a67b1e8a6b6b0ccb5deec44919ad983c82b12',
-#  crypto: {
-#    ciphertext: '423964514ee7eb5ee8f7c4047836e5743d12715889787325cc65b26b2d42ab7c',
-#    cipherparams: { iv: 'b7b16712524da59ca7585bcd55263f4b' },
-#    cipher: 'aes-128-ctr',
-#    kdf: 'scrypt',
-#    kdfparams: {
-#      dklen: 32,
-#      salt: 'f99a05124ac9459d7fb045371bf975671e06f0125470c94990995e6e0a981312',
-#      n: 8192,
-#      r: 8,
-#      p: 1
+#  "version": 3,
+#  "id": 'ace5ff1c-c971-4b8c-b066-e6215f7420d9',
+#  "address": '224a67b1e8a6b6b0ccb5deec44919ad983c82b12',
+#  "crypto": {
+#    "ciphertext": '423964514ee7eb5ee8f7c4047836e5743d12715889787325cc65b26b2d42ab7c',
+#    "cipherparams": { "iv": 'b7b16712524da59ca7585bcd55263f4b' },
+#    "cipher": 'aes-128-ctr',
+#    "kdf": 'scrypt',
+#    "kdfparams": {
+#      "dklen": 32,
+#      "salt": 'f99a05124ac9459d7fb045371bf975671e06f0125470c94990995e6e0a981312',
+#      "n": 8192,
+#      "r": 8,
+#      "p": 1
 #    },
 #    mac: '888d45374904d553ce9ee60ee49a2c52829159322a36961e2bd5efb28dba58c3'
 #  }
@@ -138,8 +138,8 @@ This will be reflected in the generated `/dls/encryptedKeyStore.json` file
 ```js
 // CLI script returns
 # {
-#   address: '0xYoUrPuBlIcKeYhErE',
-#   privateKey: '0xYoUrPrIvAtEkEyHeRe',
+#   "address": '0xYoUrPuBlIcKeYhErE',
+#   "privateKey": '0xYoUrPrIvAtEkEyHeRe',
 # }
 ```
 
@@ -155,8 +155,8 @@ This will be reflected in the generated `/dls/decryptedKeyStore.json` file
 ```js
 // UI returns
 # {
-#   address: '0xYoUrPuBlIcKeYhErE',
-#   privateKey: '0xYoUrPrIvAtEkEyHeRe',
+#   "address": "0xYoUrPuBlIcKeYhErE",
+#   "privateKey": "0xYoUrPrIvAtEkEyHeRe",
 # }
 ```
 
@@ -169,9 +169,18 @@ PRIVATE_KEY="0xYoUrPrIvAtEkEyHeRe"
 PRIVATE_KEY_PASS="undefined"
 ```
 
-9. ___`Coming soon:`___
+9. Estimate the gas costs of a transaction from the currently loaded to a receiving wallet of your choice with the `Estimate gas costs` button. You can also download the output as a JSON file.
+
+```js
+// UI returns
+# { "sender":"0xYoUrPuBlIcKeYhErE",
+#   "receiver":"0xYoUrPuBlIcKeYhErE",
+#   "estimate":21000
+# }
+```
+
+10. ___`Coming soon:`___
 - UI password entry
 - Sign and submit transactions
-- Gas estimation
 - Keystore file import
 - Network selection

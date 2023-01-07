@@ -36,7 +36,10 @@
 <form action="/pages/decrypt" method="GET">
 <button id="decrypt" onclick="loadDecrypt()">Decrypt JSON keystore to private key</button>
 </form>
-
+<form action="/pages/estimate" method="POST">
+<input id="receiver" name="receiver" value="Enter receiver wallet address here" maxlength="42"></input>
+<button id="addReceiver" onclick="loadAddReceiver()">Estimate transaction gas costs</button>
+</form>
 <!-- add on-click button html changes  -->
 <script>
 function loadCreate() {
@@ -76,6 +79,15 @@ function loadDecrypt() {
   document.getElementById("decrypt").innerHTML = "Decrypting JSON keystore to private key, please wait...";
   setTimeout(() => {
   document.getElementById("decrypt").innerHTML = "Decrypt JSON keystore to private key";
+}, 2999)
+}
+</script>
+<script>
+function loadAddReceiver() {
+  document.getElementById("receiver").readOnly = false;
+  setTimeout(() => {
+  document.getElementById("addReceiver").disabled = true;
+  document.getElementById("reload").style.display = 'block';
 }, 2999)
 }
 </script>

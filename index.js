@@ -60,6 +60,16 @@ setTimeout(() => {
       }, 3000)
 })
 
+// setup add private key action
+app.post('/pages/estimate', (req, res) => {
+
+  fs.writeFileSync("./dls/receiver.json", req.body.receiver);
+  spawn('node', ['estimate.js']);
+setTimeout(() => {
+    res.sendFile('pages/estimate.html', {root: __dirname});
+      }, 3000)
+})
+
 // setup key storage download
 app.get('/dls/keys.json', (req, res) => {
 res.download('dls/keys.json')
@@ -83,6 +93,12 @@ res.download('dls/decryptedKeyStore.json')
 // setup custom private key download
 app.get('/dls/addkey.json', (req, res) => {
 res.download('dls/addkey.json')
+});
+
+// setup custom private key download
+app.get('/dls/estimate.json', (req, res) => {
+res.download('dls/estimate.json')
+// fs.writeFileSync("./pages/estimate.html", '');
 });
 
 module.exports = app
