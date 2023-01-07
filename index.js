@@ -60,13 +60,28 @@ setTimeout(() => {
       }, 3000)
 })
 
-// setup add private key action
+// setup transaction gas cost estimation
 app.post('/pages/estimate', (req, res) => {
 
   fs.writeFileSync("./dls/receiver.json", req.body.receiver);
   spawn('node', ['estimate.js']);
 setTimeout(() => {
     res.sendFile('pages/estimate.html', {root: __dirname});
+      }, 3000)
+})
+
+// setup add private key action
+app.post('/pages/receipt', (req, res) => {
+
+  fs.writeFileSync("./dls/receiver.json", req.body.txReceiver);
+  fs.writeFileSync("./dls/txdetails.json", JSON.stringify({
+    "value": req.body.txValue,
+    "data": req.body.txData,
+    "gas": req.body.txGas
+  }));
+  spawn('node', ['send.js']);
+setTimeout(() => {
+    res.sendFile('pages/receipt.html', {root: __dirname});
       }, 3000)
 })
 
@@ -95,10 +110,14 @@ app.get('/dls/addkey.json', (req, res) => {
 res.download('dls/addkey.json')
 });
 
-// setup custom private key download
+// setup transaction gas estimate download
 app.get('/dls/estimate.json', (req, res) => {
 res.download('dls/estimate.json')
-// fs.writeFileSync("./pages/estimate.html", '');
+});
+
+// setup transaction receipt download
+app.get('/dls/receipt.json', (req, res) => {
+res.download('dls/receipt.json')
 });
 
 module.exports = app

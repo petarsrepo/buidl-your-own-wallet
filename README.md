@@ -1,6 +1,6 @@
 # buidl-your-own-wallet
 
-A compilation of scripts to perform basic Web3 wallet management functions within a single interface. Create a wallet, check its balance, encrypt your private key to JSON keystore, and decrypt your JSON keystore to private key. Here's a quick demo walkthrough of the core functionality:
+A compilation of scripts to perform basic Web3 wallet management functions within a single interface. Create a wallet, check its balance, submit transactions, estimate gas costs, encrypt your private key to JSON keystore, and decrypt your JSON keystore to private key. Here's a quick demo walkthrough of the core functionality:
 
 ![buidl-your-own-wallet-demo](https://user-images.githubusercontent.com/24898023/209030207-64ae8033-e129-4c61-9834-2f2b83b75af1.gif)
 
@@ -8,16 +8,16 @@ A compilation of scripts to perform basic Web3 wallet management functions withi
 The current implementation supports the following functions:
 - Create wallet
 - Check balance
+- Submit transactions
+- Estimate  gas costs
 - Encrypt private key to JSON keystore
 - Decrypt JSON keystore to private key
 - Load external wallet with private key
-- Estimate transaction gas costs
 - Download every function output as JSON
-
 
  ___`Coming soon`___
 - UI password entry
-- Sign and submit transactions
+- Sign transactions
 - Keystore file import
 - Network selection
 
@@ -86,11 +86,13 @@ Note that unless you have set up a PRIVATE_KEY_PASS key and value in your `.env`
 
 ```js
 // UI returns
-# The balance of your wallet is: 20223750051062211493 wei
-# Balance in gwei: 20223750051.062211493 gwei
-# Balance in Ethers: 20.223750051062211493 ETH
+# {
+#   "address":"0xYoUrPuBlIcKeYhErE",
+#   "weiBalance":"1337000000000000000"
+#   "gweiBalance":"1337000000"
+#   "ethersBalance":"1.337"
+# }
 ```
-
 5. Open your `.env` file and add a `PRIVATE_KEY_PASS` key if you don't have one already and set a preferred password for your encrypted `JSON` file:
 
 ```shell
@@ -174,12 +176,26 @@ PRIVATE_KEY_PASS="undefined"
 ```js
 // UI returns
 # { "sender":"0xYoUrPuBlIcKeYhErE",
-#   "receiver":"0xYoUrPuBlIcKeYhErE",
+#   "receiver":"0xReCeIvErPuBlIcKeYhErE",
 #   "estimate":21000
 # }
 ```
 
-10. ___`Coming soon:`___
+10. Send a transaction with specific `from`, `to`, `value`, and `data` parameters, then get the hash as receipt with the `Send transaction` button. You can also download the receipt output as a JSON file.
+
+```js
+// UI returns
+# {
+#   "from":"0xYoUrPuBlIcKeYhErE",
+#   "to":"0xReCeIvErPuBlIcKeYhErE",
+#   "value":"1337",
+#   "data":"0x80085",
+#   "gas":"22222",
+#   "hash":"0xYoUrTxReCeIpThAsHhErE"
+# }
+```
+
+11. ___`Coming soon:`___
 - UI password entry
 - Sign and submit transactions
 - Keystore file import

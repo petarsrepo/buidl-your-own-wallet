@@ -38,7 +38,14 @@
 </form>
 <form action="/pages/estimate" method="POST">
 <input id="receiver" name="receiver" value="Enter receiver wallet address here" maxlength="42"></input>
-<button id="addReceiver" onclick="loadAddReceiver()">Estimate transaction gas costs</button>
+<button id="addReceiver" onclick="loadAddReceiver()">Estimate gas costs</button>
+</form>
+<form action="/pages/receipt" method="POST">
+<input id="txReceiver" name="txReceiver" value="Enter receiver wallet address here" maxlength="42"></input>
+<input id="txValue" name="txValue" value="Enter amount to send here"></input>
+<input id="txData" name="txData" value="Enter tx data (optional)"></input>
+<input id="txGas" name="txGas" value="Enter gas amount"></input>
+<button id="addTxReceiver" onclick="loadAddTxReceiver()">Send transaction</button>
 </form>
 <!-- add on-click button html changes  -->
 <script>
@@ -87,6 +94,15 @@ function loadAddReceiver() {
   document.getElementById("receiver").readOnly = false;
   setTimeout(() => {
   document.getElementById("addReceiver").disabled = true;
+  document.getElementById("reload").style.display = 'block';
+}, 2999)
+}
+</script>
+<script>
+function loadAddTxReceiver() {
+  document.getElementById("txReceiver").readOnly = false;
+  setTimeout(() => {
+  document.getElementById("addTxReceiver").disabled = true;
   document.getElementById("reload").style.display = 'block';
 }, 2999)
 }
