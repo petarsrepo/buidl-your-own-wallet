@@ -18,8 +18,14 @@
     <body>
 
 <!-- add triggers and on-click actions  -->
+<form action="/pages/addendpoint" method="POST">
+  <input id="endpoint" readonly="true" value="Click for current endpoint" onclick="loadEndpoint()"></input>
+  <input id="newEndpoint" name="newEndpoint" value="Enter node endpoint here"></input>
+  <button id="addEndpoint" onclick="loadAddEndpoint()">Add a node endpoint to access the network</button>
+</form>
+<button id="reloadAddEndpoint" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
 <form action="/pages/create" method="GET">
-<input id="address" readonly="true" value="Click for last used address" onclick="loadAddress()"></input>
+<input id="address" readonly="true" value="Click for current address" onclick="loadAddress()"></input>
 <button id="create" onclick="loadCreate()">Create wallet</button>
 </form>
 <form action="/pages/addkey" method="POST">
@@ -50,6 +56,17 @@
 </form>
 <button id="reloadTx" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
 <!-- add on-click button html changes  -->
+<script>
+function loadAddEndpoint() {
+  document.getElementById("newEndpoint").readOnly = false;
+  document.getElementById("addEndpoint").innerHTML = "Adding endpoint, please wait...";
+  setTimeout(() => {
+  document.getElementById("addEndpoint").disabled = true;
+  document.getElementById("reloadAddEndpoint").style.display = 'block';
+  document.getElementById("addEndpoint").innerHTML = "Add wallet via private key";
+}, 2999)
+}
+</script>
 <script>
 function loadCreate() {
   document.getElementById("create").innerHTML = "Generating wallet keys, please wait...";
@@ -117,14 +134,25 @@ function loadAddTxReceiver() {
 </script>
 
 <!-- json-first key storage for compatibility -->
+<script src='/dls/newendpoint.json'></script>
+<script>
+function loadEndpoint() {
+  fetch('./dls/newendpoint.json')
+  .then((response) => response.json())
+  .then(function (json) {
+      var endpointStr = JSON.stringify(json.endpoint);
+      document.getElementById("endpoint").value = endpointStr.slice(1, endpointStr.length - 1);
+    });
+}
+</script>
 <script src='/dls/keys.json'></script>
 <script>
 function loadAddress() {
   fetch('./dls/keys.json')
   .then((response) => response.json())
   .then(function (json) {
-      var test = JSON.stringify(json.address);
-      document.getElementById("address").value = test.slice(1,43);
+      var addressStr = JSON.stringify(json.address);
+      document.getElementById("address").value = addressStr.slice(1, addressStr.length - 1);
     });
 }
 </script>

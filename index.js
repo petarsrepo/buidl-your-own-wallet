@@ -18,6 +18,16 @@ app.get('/', (req, res) => {
   res.sendFile('index.html', {root: __dirname});
 })
 
+// setup add endpoint action
+app.post('/pages/addendpoint', (req, res) => {
+
+  fs.writeFileSync("./dls/newendpoint.json", '{"endpoint":"' + req.body.newEndpoint + '"}');
+  spawn('node', ['scripts/addendpoint.js']);
+setTimeout(() => {
+    res.sendFile('pages/addendpoint.html', {root: __dirname});
+      }, 3000)
+})
+
 // setup create wallet action
 app.get('/pages/create', (req, res) => {
 spawn('node', ['scripts/create.js'])
@@ -84,6 +94,11 @@ setTimeout(() => {
     res.sendFile('pages/receipt.html', {root: __dirname});
       }, 3000)
 })
+
+// setup new endpoint download
+app.get('/dls/newendpoint.json', (req, res) => {
+res.download('dls/newendpoint.json')
+});
 
 // setup key storage download
 app.get('/dls/keys.json', (req, res) => {
