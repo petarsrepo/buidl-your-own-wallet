@@ -24,9 +24,9 @@
 </form>
 <form action="/pages/addkey" method="POST">
 <input id="newkey" name="newkey" value="Enter wallet private key here" maxlength="66"></input>
-<button id="addkey" onclick="loadAddkey()">Add private key</button>
+<button id="addkey" onclick="loadAddkey()">Add wallet via private key</button>
 </form>
-<button id="reload" onclick="location.reload()" style="display:none">Unlock input</button>
+<button id="reloadAddkey" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
 <form action="/pages/balance" method="GET">
 <button id="balance" onclick="loadBalance()">Check balance</button>
 </form>
@@ -40,6 +40,7 @@
 <input id="receiver" name="receiver" value="Enter receiver wallet address here" maxlength="42"></input>
 <button id="addReceiver" onclick="loadAddReceiver()">Estimate gas costs</button>
 </form>
+<button id="reloadEstimate" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
 <form action="/pages/receipt" method="POST">
 <input id="txReceiver" name="txReceiver" value="Enter receiver wallet address here" maxlength="42"></input>
 <input id="txValue" name="txValue" value="Enter amount to send here"></input>
@@ -47,6 +48,7 @@
 <input id="txGas" name="txGas" value="Enter gas amount"></input>
 <button id="addTxReceiver" onclick="loadAddTxReceiver()">Send transaction</button>
 </form>
+<button id="reloadTx" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
 <!-- add on-click button html changes  -->
 <script>
 function loadCreate() {
@@ -59,9 +61,11 @@ function loadCreate() {
 <script>
 function loadAddkey() {
   document.getElementById("newkey").readOnly = false;
+  document.getElementById("addkey").innerHTML = "Loading wallet, please wait...";
   setTimeout(() => {
   document.getElementById("addkey").disabled = true;
-  document.getElementById("reload").style.display = 'block';
+  document.getElementById("reloadAddkey").style.display = 'block';
+  document.getElementById("addkey").innerHTML = "Add wallet via private key";
 }, 2999)
 }
 </script>
@@ -92,18 +96,22 @@ function loadDecrypt() {
 <script>
 function loadAddReceiver() {
   document.getElementById("receiver").readOnly = false;
+  document.getElementById("addReceiver").innerHTML = "Estimating gas costs, please wait...";
   setTimeout(() => {
   document.getElementById("addReceiver").disabled = true;
-  document.getElementById("reload").style.display = 'block';
+  document.getElementById("reloadEstimate").style.display = 'block';
+  document.getElementById("addReceiver").innerHTML = "Estimate gas costs";
 }, 2999)
 }
 </script>
 <script>
 function loadAddTxReceiver() {
   document.getElementById("txReceiver").readOnly = false;
+  document.getElementById("addTxReceiver").innerHTML = "Sending transaction, please wait...";
   setTimeout(() => {
   document.getElementById("addTxReceiver").disabled = true;
-  document.getElementById("reload").style.display = 'block';
+  document.getElementById("reloadTx").style.display = 'block';
+  document.getElementById("addTxReceiver").innerHTML = "Send transaction";
 }, 2999)
 }
 </script>
