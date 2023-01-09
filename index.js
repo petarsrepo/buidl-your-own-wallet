@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 
 // setup create wallet action
 app.get('/pages/create', (req, res) => {
-spawn('node', ['create.js'])
+spawn('node', ['scripts/create.js'])
 setTimeout(() => {
   res.sendFile('pages/create.html', {root: __dirname})
   }, 3000)
@@ -28,7 +28,7 @@ setTimeout(() => {
 
 // setup check balance action
 app.get('/pages/balance', (req, res) => {
-spawn('node', ['balance.js'])
+spawn('node', ['scripts/balance.js'])
 setTimeout(() => {
   res.sendFile('pages/balance.html', {root: __dirname})
   }, 3000)
@@ -36,7 +36,7 @@ setTimeout(() => {
 
 // setup encrypt action
 app.get('/pages/encrypt', (req, res) => {
-spawn('node', ['encrypt.js'])
+spawn('node', ['scripts/encrypt.js'])
 setTimeout(() => {
   res.sendFile('pages/encrypt.html', {root: __dirname})
   }, 3000)
@@ -44,7 +44,7 @@ setTimeout(() => {
 
 // setup decrypt action
 app.get('/pages/decrypt', (req, res) => {
-spawn('node', ['decrypt.js'])
+spawn('node', ['scripts/decrypt.js'])
 setTimeout(() => {
   res.sendFile('pages/decrypt.html', {root: __dirname})
   }, 3000)
@@ -54,7 +54,7 @@ setTimeout(() => {
 app.post('/pages/addkey', (req, res) => {
 
   fs.writeFileSync("./dls/newkey.json", req.body.newkey);
-  spawn('node', ['addkey.js']);
+  spawn('node', ['scripts/addkey.js']);
 setTimeout(() => {
     res.sendFile('pages/addkey.html', {root: __dirname});
       }, 3000)
@@ -64,7 +64,7 @@ setTimeout(() => {
 app.post('/pages/estimate', (req, res) => {
 
   fs.writeFileSync("./dls/receiver.json", req.body.receiver);
-  spawn('node', ['estimate.js']);
+  spawn('node', ['scripts/estimate.js']);
 setTimeout(() => {
     res.sendFile('pages/estimate.html', {root: __dirname});
       }, 3000)
@@ -79,7 +79,7 @@ app.post('/pages/receipt', (req, res) => {
     "data": req.body.txData,
     "gas": req.body.txGas
   }));
-  spawn('node', ['send.js']);
+  spawn('node', ['scripts/send.js']);
 setTimeout(() => {
     res.sendFile('pages/receipt.html', {root: __dirname});
       }, 3000)
