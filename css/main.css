@@ -1,0 +1,68 @@
+html {
+  background: linear-gradient(
+      rgba(14, 92, 219, 0.7),
+      rgba(155, 101, 34, 0.7)
+    ),
+    url('https://thumbs.gfycat.com/ObviousLimpArgentinehornedfrog-size_restricted.gif');
+  background-size: cover;
+  height: 100%;
+  margin: 0;
+}
+
+input {
+  width: 100%;
+}
+
+.wrapper {
+  style="display:flex;
+  flex-direction: column;
+  align-items: center;
+  border: black;
+  border-style: solid;
+  max-width: fit-content;
+  background-color: white;
+  margin:auto;"
+}
+
+h1 {
+  color:black;
+  text-align:center
+}
+
+.actions {
+  max-width: fit-content;
+  padding:5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.action-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin:1%
+}
+
+.action-label {
+  display:flex;
+  flex-direction: column;
+  text-align:center;
+}
+
+.action-form {
+  display:flex;
+  flex-direction: column;
+}
+
+.action-btn {
+  width: -webkit-fill-available;
+}
+
+.reload-btn {
+  display:none;
+  margin-bottom: 1%;
+  width: -webkit-fill-available;
+}

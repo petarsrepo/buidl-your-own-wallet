@@ -1,159 +1,232 @@
-<html data-arp-injected="true"><head>
+<html data-arp-injected="true">
 
-    <meta charset="UTF-8">
-    <style>
-      html {
-        background: linear-gradient(
-            rgba(14, 92, 219, 0.7),
-            rgba(155, 101, 34, 0.7)
-          ),
-          url('https://thumbs.gfycat.com/ObviousLimpArgentinehornedfrog-size_restricted.gif');
-        background-size: cover;
-        height: 100%;
-        margin: 0;
-      }
-    </style>
-          <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-  </head>
-    <body>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
-<!-- add triggers and on-click actions  -->
-<form action="/pages/addendpoint" method="POST">
-  <input id="endpoint" readonly="true" value="Click for current endpoint" onclick="loadEndpoint()"></input>
-  <input id="newEndpoint" name="newEndpoint" value="Enter node endpoint here"></input>
-  <button id="addEndpoint" onclick="loadAddEndpoint()">Add a node endpoint to access the network</button>
-</form>
-<button id="reloadAddEndpoint" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
-<form action="/pages/create" method="GET">
-<input id="address" readonly="true" value="Click for current address" onclick="loadAddress()"></input>
-<button id="create" onclick="loadCreate()">Create wallet</button>
-</form>
-<form action="/pages/addkey" method="POST">
-<input id="newkey" name="newkey" value="Enter wallet private key here" maxlength="66"></input>
-<button id="addkey" onclick="loadAddkey()">Add wallet via private key</button>
-</form>
-<button id="reloadAddkey" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
-<form action="/pages/balance" method="GET">
-<button id="balance" onclick="loadBalance()">Check balance</button>
-</form>
-<form action="/pages/encrypt" method="GET">
-<button id="encrypt" onclick="loadEncrypt()">Encrypt private key to JSON keystore</button>
-</form>
-<form action="/pages/decrypt" method="GET">
-<button id="decrypt" onclick="loadDecrypt()">Decrypt JSON keystore to private key</button>
-</form>
-<form action="/pages/estimate" method="POST">
-<input id="receiver" name="receiver" value="Enter receiver wallet address here" maxlength="42"></input>
-<button id="addReceiver" onclick="loadAddReceiver()">Estimate gas costs</button>
-</form>
-<button id="reloadEstimate" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
-<form action="/pages/receipt" method="POST">
-<input id="txReceiver" name="txReceiver" value="Enter receiver wallet address here" maxlength="42"></input>
-<input id="txValue" name="txValue" value="Enter amount to send here"></input>
-<input id="txData" name="txData" value="Enter tx data (optional)"></input>
-<input id="txGas" name="txGas" value="Enter gas amount"></input>
-<button id="addTxReceiver" onclick="loadAddTxReceiver()">Send transaction</button>
-</form>
-<button id="reloadTx" onclick="location.reload()" style="display:none; margin-bottom: 1%">Unlock input</button>
-<!-- add on-click button html changes  -->
-<script>
-function loadAddEndpoint() {
-  document.getElementById("newEndpoint").readOnly = false;
-  document.getElementById("addEndpoint").innerHTML = "Adding endpoint, please wait...";
-  setTimeout(() => {
-  document.getElementById("addEndpoint").disabled = true;
-  document.getElementById("reloadAddEndpoint").style.display = 'block';
-  document.getElementById("addEndpoint").innerHTML = "Add wallet via private key";
-}, 2999)
-}
-</script>
-<script>
-function loadCreate() {
-  document.getElementById("create").innerHTML = "Generating wallet keys, please wait...";
-  setTimeout(() => {
-  document.getElementById("create").innerHTML = "Create wallet";
-}, 2999)
-}
-</script>
-<script>
-function loadAddkey() {
-  document.getElementById("newkey").readOnly = false;
-  document.getElementById("addkey").innerHTML = "Loading wallet, please wait...";
-  setTimeout(() => {
-  document.getElementById("addkey").disabled = true;
-  document.getElementById("reloadAddkey").style.display = 'block';
-  document.getElementById("addkey").innerHTML = "Add wallet via private key";
-}, 2999)
-}
-</script>
-<script>
-function loadBalance() {
-  document.getElementById("balance").innerHTML = "Fetching wallet balance, please wait...";
-  setTimeout(() => {
-  document.getElementById("balance").innerHTML = "Check balance";
-}, 2999)
-}
-</script>
-<script>
-function loadEncrypt() {
-  document.getElementById("encrypt").innerHTML = "Encrypting private key to JSON keystore, please wait...";
-  setTimeout(() => {
-  document.getElementById("encrypt").innerHTML = "Encrypt private key to JSON keystore";
-}, 2999)
-}
-</script>
-<script>
-function loadDecrypt() {
-  document.getElementById("decrypt").innerHTML = "Decrypting JSON keystore to private key, please wait...";
-  setTimeout(() => {
-  document.getElementById("decrypt").innerHTML = "Decrypt JSON keystore to private key";
-}, 2999)
-}
-</script>
-<script>
-function loadAddReceiver() {
-  document.getElementById("receiver").readOnly = false;
-  document.getElementById("addReceiver").innerHTML = "Estimating gas costs, please wait...";
-  setTimeout(() => {
-  document.getElementById("addReceiver").disabled = true;
-  document.getElementById("reloadEstimate").style.display = 'block';
-  document.getElementById("addReceiver").innerHTML = "Estimate gas costs";
-}, 2999)
-}
-</script>
-<script>
-function loadAddTxReceiver() {
-  document.getElementById("txReceiver").readOnly = false;
-  document.getElementById("addTxReceiver").innerHTML = "Sending transaction, please wait...";
-  setTimeout(() => {
-  document.getElementById("addTxReceiver").disabled = true;
-  document.getElementById("reloadTx").style.display = 'block';
-  document.getElementById("addTxReceiver").innerHTML = "Send transaction";
-}, 2999)
-}
-</script>
+  <script>
+    function loadAddEndpoint() {
+      document.getElementById("newEndpoint").readOnly = false;
+      document.getElementById("addEndpoint").innerHTML = "Adding endpoint...";
+      setTimeout(() => {
+        document.getElementById("addEndpoint").disabled = true;
+        document.getElementById("reloadAddEndpoint").style.display = 'block';
+        document.getElementById("addEndpoint").innerHTML = "Add endpoint to start";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadCreate() {
+      document.getElementById("create").innerHTML = "Creating wallet...";
+      setTimeout(() => {
+        document.getElementById("create").innerHTML = "Create wallet";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadAddkey() {
+      document.getElementById("newkey").readOnly = false;
+      document.getElementById("addkey").innerHTML = "Loading new wallet...";
+      setTimeout(() => {
+        document.getElementById("addkey").disabled = true;
+        document.getElementById("reloadAddkey").style.display = 'block';
+        document.getElementById("addkey").innerHTML = "Add wallet private key";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadBalance() {
+      document.getElementById("balance").innerHTML = "Fetching balance...";
+      setTimeout(() => {
+        document.getElementById("balance").innerHTML = "Check wallet balance";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadAddPassword() {
+      document.getElementById("newPassword").readOnly = false;
+      document.getElementById("addPassword").innerHTML = "Setting password...";
+      setTimeout(() => {
+        document.getElementById("addPassword").disabled = true;
+        document.getElementById("reloadAddPassword").style.display = 'block';
+        document.getElementById("addPassword").innerHTML = "Set keystore password";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadEncrypt() {
+      document.getElementById("encrypt").innerHTML = "Encrypting keystore...";
+      setTimeout(() => {
+        document.getElementById("encrypt").innerHTML = "Encrypt access to keystore";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadDecrypt() {
+      document.getElementById("decrypt").innerHTML = "Decrypting keystore...";
+      setTimeout(() => {
+        document.getElementById("decrypt").innerHTML = "Decrypt existing keystore";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadAddReceiver() {
+      document.getElementById("receiver").readOnly = false;
+      document.getElementById("addReceiver").innerHTML = "Estimating costs...";
+      setTimeout(() => {
+        document.getElementById("addReceiver").disabled = true;
+        document.getElementById("reloadEstimate").style.display = 'block';
+        document.getElementById("addReceiver").innerHTML = "Estimate gas costs";
+      }, 2999)
+    }
+  </script>
+  <script>
+    function loadAddTxReceiver() {
+      document.getElementById("txReceiver").readOnly = false;
+      document.getElementById("addTxReceiver").innerHTML = "Sending transaction...";
+      setTimeout(() => {
+        document.getElementById("addTxReceiver").disabled = true;
+        document.getElementById("reloadTx").style.display = 'block';
+        document.getElementById("addTxReceiver").innerHTML = "Send transaction";
+      }, 2999)
+    }
+  </script>
 
-<!-- json-first key storage for compatibility -->
-<script src='/dls/newendpoint.json'></script>
-<script>
-function loadEndpoint() {
-  fetch('./dls/newendpoint.json')
-  .then((response) => response.json())
-  .then(function (json) {
-      var endpointStr = JSON.stringify(json.endpoint);
-      document.getElementById("endpoint").value = endpointStr.slice(1, endpointStr.length - 1);
-    });
-}
-</script>
-<script src='/dls/keys.json'></script>
-<script>
-function loadAddress() {
-  fetch('./dls/keys.json')
-  .then((response) => response.json())
-  .then(function (json) {
-      var addressStr = JSON.stringify(json.address);
-      document.getElementById("address").value = addressStr.slice(1, addressStr.length - 1);
-    });
-}
-</script>
-</body></html>
+  <!-- json-first key storage for compatibility -->
+
+  <script>
+    function loadEndpoint() {
+      fetch('./dls/newendpoint.json')
+        .then((response) => response.json())
+        .then(function(json) {
+          var endpointStr = JSON.stringify(json.endpoint);
+          document.getElementById("endpoint").value = endpointStr.slice(1, endpointStr.length - 1);
+        }).catch(err => alert(err));
+    }
+  </script>
+
+
+  <script>
+    function loadPassword() {
+      fetch('./dls/newpassword.json')
+        .then((response) => response.json())
+        .then(function(json) {
+          var passStr = JSON.stringify(json.password);
+          document.getElementById("password").value = passStr.slice(1, passStr.length - 1);
+        }).catch(err => alert(err));
+    }
+  </script>
+
+
+  <script>
+    function loadAddress() {
+      fetch('./dls/keys.json')
+        .then((response) => response.json())
+        .then(function(json) {
+          var addressStr = JSON.stringify(json.address);
+          document.getElementById("address").value = addressStr.slice(1, addressStr.length - 1);
+        });
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <!-- add triggers and on-click actions  -->
+  <div class="wrapper">
+    <h1>BUIDL your own wallet</h1>
+    <div class="actions">
+
+      <div class="action-wrapper" id="endpoint-cat">
+        <h2>Endpoint</h2>
+        <label class="action-label"><strong>Current endpoint</strong>
+          <input id="endpoint" readonly="true" value="Click to show endpoint" onclick="loadEndpoint()"></input>
+        </label>
+        </br>
+        <label class="action-label"><strong>Change endpoint</strong>
+          <form action="/pages/addendpoint" method="POST" class="action-form">
+            <input id="newEndpoint" name="newEndpoint" value="Enter new node endpoint"></input>
+            <button id="addEndpoint" onclick="loadAddEndpoint()" class="action-btn">Set endpoint</button>
+          </form>
+          <button id="reloadAddEndpoint" onclick="location.reload()" class="reload-btn">Unlock input</button>
+        </label>
+      </div>
+
+      </br>
+
+      <div class="action-wrapper" id="wallet-cat">
+        <h2>Wallet</h2>
+        <label class="action-label"><strong>Current wallet</strong>
+          <input id="address" readonly="true" value="Click to show address" onclick="loadAddress()"></input>
+          <form action="/pages/balance" method="GET" class="action-form">
+            <button id="balance" onclick="loadBalance()" class="action-btn">Check balance</button>
+          </form>
+        </label>
+
+        <label class="action-label"><strong>Change wallet</strong>
+          <form action="/pages/addkey" method="POST" class="action-form">
+            <input id="newkey" name="newkey" value="Enter new private key" maxlength="66"></input>
+            <button id="addkey" onclick="loadAddkey()" class="action-btn">Add wallet private key</button>
+          </form>
+          <form action="/pages/create" method="GET" class="action-form">
+            <button id="create" onclick="loadCreate()" class="action-btn">Create wallet</button>
+          </form>
+          <button id="reloadAddkey" onclick="location.reload()" class="reload-btn">Unlock input</button>
+        </label>
+      </div>
+
+      </br>
+
+      <div class="action-wrapper" id="transaction-wrapper">
+        <h2>Transaction</h2>
+        <label class="action-label"><strong>Estimate gas costs</strong>
+          <form action="/pages/estimate" method="POST" class="action-form">
+            <input id="receiver" name="receiver" value="Enter receiver address" maxlength="42"></input>
+            <button id="addReceiver" onclick="loadAddReceiver()" class="action-btn">Estimate costs</button>
+          </form>
+          <button id="reloadEstimate" onclick="location.reload()" class="reload-btn">Unlock input</button>
+        </label>
+        <label class="action-label"><strong>Create transaction</strong>
+          <form action="/pages/receipt" method="POST" class="action-form">
+            <input id="txReceiver" name="txReceiver" value="Enter receiver address" maxlength="42"></input>
+            <input id="txValue" name="txValue" value="Enter amount to send"></input>
+            <input id="txData" name="txData" value="Enter tx data (optional)"></input>
+            <input id="txGas" name="txGas" value="Enter gas amount"></input>
+            <button id="addTxReceiver" onclick="loadAddTxReceiver()" class="action-btn">Send transaction</button>
+          </form>
+          <button id="reloadTx" onclick="location.reload()" class="reload-btn">Unlock input</button>
+        </label>
+      </div>
+
+      </br>
+
+      <div class="action-wrapper" id="security-cat">
+        <h2>Security</h2>
+        <label class="action-label"><strong>Encrypt keystore</strong>
+          <input id="password" readonly="true" value="Click to show password" onclick="loadPassword()"></input>
+          <form action="/pages/encrypt" method="GET" class="action-form">
+            <button id="encrypt" onclick="loadEncrypt()" class="action-btn">Create keystore</button>
+          </form>
+        <label class="action-label"><strong>Change password</strong>
+          <form action="/pages/addpassword" method="POST" class="action-form">
+            <input id="newPassword" name="newPassword" value="Enter new keystore pass"></input>
+            <button id="addPassword" onclick="loadAddPassword()" class="action-btn">Set keystore password</button>
+          </form>
+          <button id="reloadAddPassword" onclick="location.reload()" class="reload-btn">Unlock input</button>
+        </label>
+        <label class="action-label"><strong>Decrypt keystore</strong>
+          <input id="keystore" readonly="true" value="./dls/encryptedKeyStore" onclick="loadKeystore()"></input>
+          <form action="/pages/decrypt" method="GET" class="action-form">
+            <button id="decrypt" onclick="loadDecrypt()" class="action-btn">Decrypt keystore</button>
+          </form>
+        </label>
+
+      </div>
+
+      <!-- </div> -->
+    </div>
+</body>
+
+</html>

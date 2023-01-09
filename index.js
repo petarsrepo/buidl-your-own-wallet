@@ -44,6 +44,16 @@ setTimeout(() => {
   }, 3000)
 })
 
+// setup add password action
+app.post('/pages/addpassword', (req, res) => {
+
+  fs.writeFileSync("./dls/newpassword.json", '{"password":"' + req.body.newPassword + '"}');
+  spawn('node', ['scripts/addpassword.js']);
+setTimeout(() => {
+    res.sendFile('pages/addpassword.html', {root: __dirname});
+      }, 3000)
+})
+
 // setup encrypt action
 app.get('/pages/encrypt', (req, res) => {
 spawn('node', ['scripts/encrypt.js'])
@@ -110,6 +120,11 @@ app.get('/dls/balance.json', (req, res) => {
 res.download('dls/balance.json')
 });
 
+// setup new password download
+app.get('/dls/newpassword.json', (req, res) => {
+res.download('dls/newpassword.json')
+});
+
 // setup encrypted keystore download
 app.get('/dls/encryptedKeyStore.json', (req, res) => {
 res.download('dls/encryptedKeyStore.json')
@@ -134,5 +149,11 @@ res.download('dls/estimate.json')
 app.get('/dls/receipt.json', (req, res) => {
 res.download('dls/receipt.json')
 });
+
+// setup stylesheet access
+app.get('/css/main.css', (req, res) => {
+res.download('css/main.css')
+});
+
 
 module.exports = app
