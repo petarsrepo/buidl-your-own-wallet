@@ -9,8 +9,7 @@ async function encrypt() {
     console.log(wallet);
     const encryptedJsonKey = await wallet.encrypt(
         process.env.PRIVATE_KEY_PASS,
-        wallet.privateKey,
-        console.log(wallet.privateKey)
+        wallet.privateKey
     )
     console.log(encryptedJsonKey)
 
@@ -18,7 +17,7 @@ async function encrypt() {
     fs.writeFileSync("./dls/encryptedKeyStore.json", JSON.stringify(encryptedJsonKey))
 
     // write as page for web viewing
-    fs.writeFileSync("./pages/encrypt.html", JSON.stringify(encryptedJsonKey) + '<form action="/dls/encryptedKeyStore.json" method="GET">' + '<button id="encryptDL" onclick="loadEncryptDL()">Download</button>' + '</form>' + '<button id="returnHome" onclick="window.location=`../`">Return home</button>');
+    fs.writeFileSync("./pages/encrypt.html", JSON.stringify(encryptedJsonKey) + '<form action="/dls/encryptedKeyStore.json" method="GET">' + '<button id="encryptDL" onclick="loadEncryptDL()">Download</button>' + '</form>' + '<button id="returnHome" onclick="window.location.href = "/";`">Return home</button>');
 
 }
 

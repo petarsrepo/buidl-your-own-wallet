@@ -2,6 +2,7 @@ require("dotenv").config()
 const fs = require("fs")
 
 // prepare output
+async function addEndpoint() {
 var addendpoint = fs.readFileSync("./dls/newendpoint.json", 'utf8')
 console.log(addendpoint.endpoint);
 // ammend .env for other script access
@@ -12,4 +13,11 @@ const changesENV = endpointENV + "\n" + pkeyENV + "\n" + pkeypassENV
 fs.writeFileSync("./.env", changesENV)
 
 // write as page for web viewing
-fs.writeFileSync("./pages/addendpoint.html", 'Your new endpoint is: ' + JSON.stringify(JSON.parse(addendpoint).endpoint) + '</form>' + '<button id="returnHome" onclick="window.location=`../`">Return home</button>');
+fs.writeFileSync("./pages/addendpoint.html", 'Your new endpoint is: ' + JSON.stringify(JSON.parse(addendpoint).endpoint) + '</form>' + '<button id="returnHome" onclick="window.location = `/`">Return home</button>');
+}
+addEndpoint()
+.then(() => process.exit(0))
+.catch((error) => {
+    console.error(error)
+    process.exit(1)
+})

@@ -33,7 +33,7 @@ const transaction = await web3.eth.sendTransaction({
   console.log(receipt);
 
 // write as page for web viewing
-fs.writeFileSync("./pages/receipt.html", '<h2>Sending transaction...</h2><strong>From: </strong>' + address + '</br><strong>To:</strong> ' + receiver + '</br><strong>Gas: </strong>' + txGas + 'wei</br><strong>Value: </strong>' + txValue + 'wei,' + '</br><strong>Data: </strong>' + txData + '</br><strong>Hash: </strong>' + receipt + '</br><form action="../dls/receipt.json" method="GET">' + '<button id="receiptDL" onclick="loadReceiptDL()">Download</button>' + '</form>' + '<button id="returnHome" onclick="window.location=`../`">Return home</button>');
+fs.writeFileSync("./pages/receipt.html", '<h2>Sending transaction...</h2><strong>From: </strong>' + address + '</br><strong>To:</strong> ' + receiver + '</br><strong>Gas: </strong>' + txGas + 'wei</br><strong>Value: </strong>' + txValue + 'wei,' + '</br><strong>Data: </strong>' + txData + '</br><strong>Hash: </strong>' + receipt + '</br><form action="../dls/receipt.json" method="GET">' + '<button id="receiptDL" onclick="loadReceiptDL()">Download</button>' + '</form>' + '<button id="returnHome" onclick="window.location = `/`">Return home</button>');
 fs.writeFileSync("./dls/receipt.json", JSON.stringify({
   from: address,
   to: receiver,
@@ -47,7 +47,12 @@ fs.writeFileSync("./dls/receipt.json", JSON.stringify({
 } else {
 
 // pass error if input is ivalid
-fs.writeFileSync("./pages/receipt.html", "<strong>Input error: Invalid wallet address</strong>" + "</br>Confirm you have entered the receiving address correctly." + "</br>Don't forget to add '0x' as prefix to the receiving address to pass the validation!" + "</br>Example: 0x4281eCF07778Ee777C564a59048801330f3084eE</br>" + `<button id="tryAgain" onclick="window.location='../'">Try again</button>`);
+fs.writeFileSync("./pages/receipt.html", "<strong>Input error: Invalid wallet address</strong>" + "</br>Confirm you have entered the receiving address correctly." + "</br>Don't forget to add '0x' as prefix to the receiving address to pass the validation!" + "</br>Example: 0x4281eCF07778Ee777C564a59048801330f3084eE</br>" + '<button id="tryAgain" onclick="window.location = `/`">Try again</button>');
 }
 }
 sendTx()
+.then(() => process.exit(0))
+.catch((error) => {
+    console.error(error)
+    process.exit(1)
+})

@@ -14,12 +14,12 @@ require('dotenv').config();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.listen(process.env.PORT || 3000);
-app.get('/', (req, res) => {
+app.all('/', (req, res) => {
   res.sendFile('index.html', {root: __dirname});
 })
 
 // setup add endpoint action
-app.post('/pages/addendpoint', (req, res) => {
+app.all('/pages/addendpoint', (req, res) => {
 
   fs.writeFileSync("./dls/newendpoint.json", '{"endpoint":"' + req.body.newEndpoint + '"}');
   spawn('node', ['scripts/addendpoint.js']);
@@ -29,7 +29,7 @@ setTimeout(() => {
 })
 
 // setup create wallet action
-app.get('/pages/create', (req, res) => {
+app.all('/pages/create', (req, res) => {
 spawn('node', ['scripts/create.js'])
 setTimeout(() => {
   res.sendFile('pages/create.html', {root: __dirname})
@@ -37,7 +37,7 @@ setTimeout(() => {
 })
 
 // setup check balance action
-app.get('/pages/balance', (req, res) => {
+app.all('/pages/balance', (req, res) => {
 spawn('node', ['scripts/balance.js'])
 setTimeout(() => {
   res.sendFile('pages/balance.html', {root: __dirname})
@@ -45,7 +45,7 @@ setTimeout(() => {
 })
 
 // setup add password action
-app.post('/pages/addpassword', (req, res) => {
+app.all('/pages/addpassword', (req, res) => {
 
   fs.writeFileSync("./dls/newpassword.json", '{"password":"' + req.body.newPassword + '"}');
   spawn('node', ['scripts/addpassword.js']);
@@ -55,7 +55,7 @@ setTimeout(() => {
 })
 
 // setup encrypt action
-app.get('/pages/encrypt', (req, res) => {
+app.all('/pages/encrypt', (req, res) => {
 spawn('node', ['scripts/encrypt.js'])
 setTimeout(() => {
   res.sendFile('pages/encrypt.html', {root: __dirname})
@@ -63,7 +63,7 @@ setTimeout(() => {
 })
 
 // setup decrypt action
-app.get('/pages/decrypt', (req, res) => {
+app.all('/pages/decrypt', (req, res) => {
 spawn('node', ['scripts/decrypt.js'])
 setTimeout(() => {
   res.sendFile('pages/decrypt.html', {root: __dirname})
@@ -71,7 +71,7 @@ setTimeout(() => {
 })
 
 // setup add private key action
-app.post('/pages/addkey', (req, res) => {
+app.all('/pages/addkey', (req, res) => {
 
   fs.writeFileSync("./dls/newkey.json", req.body.newkey);
   spawn('node', ['scripts/addkey.js']);
@@ -81,7 +81,7 @@ setTimeout(() => {
 })
 
 // setup transaction gas cost estimation
-app.post('/pages/estimate', (req, res) => {
+app.all('/pages/estimate', (req, res) => {
 
   fs.writeFileSync("./dls/receiver.json", req.body.receiver);
   spawn('node', ['scripts/estimate.js']);
@@ -91,7 +91,7 @@ setTimeout(() => {
 })
 
 // setup add private key action
-app.post('/pages/receipt', (req, res) => {
+app.all('/pages/receipt', (req, res) => {
 
   fs.writeFileSync("./dls/receiver.json", req.body.txReceiver);
   fs.writeFileSync("./dls/txdetails.json", JSON.stringify({
