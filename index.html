@@ -39,10 +39,10 @@
   </script>
 
   <script>
-    function loadBalance() {
-      document.getElementById("balance").innerHTML = "Fetching balance...";
+    function loadGetBalance() {
+      document.getElementById("getBalance").innerHTML = "Fetching balance...";
       setTimeout(() => {
-        document.getElementById("balance").innerHTML = "Check balance";
+        document.getElementById("getBalance").innerHTML = "Check balance";
       }, 2999)
     }
   </script>
@@ -136,20 +136,110 @@
     }
   </script>
 
-</head>
-<body>
+  <script>
+    function loadVitals() {
+      fetch('./dls/keys.json')
+        .then((response) => response.json())
+        .then(function(json) {
+          var addressStr = JSON.stringify(json.address);
+          document.getElementById("address").value = addressStr.slice(1, addressStr.length - 1);
+        });
+      fetch('./dls/newendpoint.json')
+        .then((response) => response.json())
+        .then(function(json) {
+          var endpointStr = JSON.stringify(json.endpoint);
+          document.getElementById("endpoint").value = endpointStr.slice(1, endpointStr.length - 1);
+        });
+      fetch('./dls/balance.json')
+        .then((response) => response.json())
+        .then(function(json) {
+          var balanceStr = JSON.stringify(json.ethersBalance);
+          document.getElementById("balance").value = balanceStr.slice(1, balanceStr.length - 1);
+        });
+    }
+  </script>
 
-  <!-- add triggers and on-click actions  -->
+  <script>
+    function loadConsole() {
+      window.open("https://console.chainstack.com/", "_blank");
+    }
+  </script>
+
+  <script>
+    function loadEndpointTip() {
+      document.getElementById("endpoint").value = "Click me to get a free endpoint from chainstack.com"
+    }
+  </script>
+
+  <script>
+    function loadWalletTip() {
+      document.getElementById("wallet-label").innerHTML = "Click to copy wallet address"
+    }
+  </script>
+
+  <script>
+    function loadWalletLabel() {
+      document.getElementById("wallet-label").innerHTML = "Wallet address"
+    }
+  </script>
+
+  <script>
+    function loadBalanceTip() {
+      document.getElementById("balance").value = "Click to show your transaction history on Etherscan"
+    }
+  </script>
+
+  <script>
+    function loadExplorer() {
+      window.open("https://etherscan.com/address/" + document.getElementById("address").value, "_blank");
+    }
+  </script>
+
+  <script>
+    function loadWalletCopy() {
+      var copyText = document.getElementById("address");
+      copyText.select();
+      copyText.setSelectionRange(0, 99999);
+      navigator.clipboard.writeText(copyText.value);
+      alert("Wallet address copied to clipoard: " + copyText.value);
+    }
+  </script>
+
+</head>
+<!-- add triggers and on-click actions  -->
+
+<body onload="loadVitals()">
   <div class="wrapper">
-    <h1>BUIDL your own wallet</h1>
+    <h1>BUIDL Y(OUR) O(WN) WALLET</h1>
+    <div class="vitals">
+      <label class="action-label" style="padding-left: 5px; padding-right:5px"><strong>Node endpoint</strong>
+        <input class="vitals-txt" id="endpoint" readonly="true" value="Get a free endpoint on click here or set it below..." onclick="loadConsole()" onmouseover="loadEndpointTip()" onmouseout="loadVitals()"></input>
+        </br>
+        <label class="action-label" style="padding-left: 5px; padding-right:5px"><strong id="wallet-label">Wallet address</strong>
+          <input class="vitals-txt" id="address" readonly="true" value="Create a new wallet or add an existing address..." onclick="loadWalletCopy()" onmouseover="loadWalletTip()" onmouseout="loadWalletLabel()"></input>
+        </label>
+        </br>
+        <label class="action-label" style="padding-left: 5px; padding-right:5px"><strong>Latest balance</strong>
+          <input class="vitals-txt" id="balance" readonly="true" value="Load wallet to get balance & send transactions..." onclick="loadExplorer()" onmouseover="loadBalanceTip()" onmouseout="loadVitals()"></input>
+        </label>
+    </div>
     <div class="actions">
 
       <div class="action-wrapper" id="endpoint-cat">
-        <h2>Endpoint</h2>
-        <label class="action-label"><strong>Current endpoint</strong>
-          <input id="endpoint" readonly="true" value="Click to show endpoint" onclick="loadEndpoint()"></input>
+        <h2>Manage</h2>
+        <label class="action-label"><strong>Access wallets</strong>
+          <form action="/pages/balance" method="GET" class="action-form">
+            <button id="getBalance" onclick="loadGetBalance()" class="action-btn">Print balance</button>
+          </form>
+          <form action="/pages/create" method="GET" class="action-form">
+            <button id="create" onclick="loadCreate()" class="action-btn">Create new</button>
+          </form>
+          <form action="/pages/addkey" method="POST" class="action-form">
+            <input id="newkey" name="newkey" placeholder="Enter private key" maxlength="66"></input>
+            <button id="addkey" onclick="loadAddkey()" class="action-btn">Load wallet</button>
+          </form>
+          <button id="reloadAddkey" onclick="location.reload()" class="reload-btn">Unlock input</button>
         </label>
-        </br>
         <label class="action-label"><strong>Change endpoint</strong>
           <form action="/pages/addendpoint" method="POST" class="action-form">
             <input id="newEndpoint" name="newEndpoint" placeholder="Enter node endpoint"></input>
@@ -161,32 +251,9 @@
 
       </br>
 
-      <div class="action-wrapper" id="wallet-cat">
-        <h2>Wallet</h2>
-        <label class="action-label"><strong>Current wallet</strong>
-          <input id="address" readonly="true" value="Click to show address" onclick="loadAddress()"></input>
-          <form action="/pages/balance" method="GET" class="action-form">
-            <button id="balance" onclick="loadBalance()" class="action-btn">Check balance</button>
-          </form>
-        </label>
-
-        <label class="action-label"><strong>Change wallet</strong>
-          <form action="/pages/create" method="GET" class="action-form">
-            <button id="create" onclick="loadCreate()" class="action-btn">Create new</button>
-          </form>
-          <form action="/pages/addkey" method="POST" class="action-form">
-            <input id="newkey" name="newkey" placeholder="Enter private key" maxlength="66"></input>
-            <button id="addkey" onclick="loadAddkey()" class="action-btn">Load wallet</button>
-          </form>
-          <button id="reloadAddkey" onclick="location.reload()" class="reload-btn">Unlock input</button>
-        </label>
-      </div>
-
-      </br>
-
       <div class="action-wrapper" id="transaction-wrapper">
-        <h2>Transaction</h2>
-        <label class="action-label"><strong>Gas estimate</strong>
+        <h2>Transact</h2>
+        <label class="action-label"><strong>Estimate gas</strong>
           <form action="/pages/estimate" method="POST" class="action-form">
             <input id="receiver" name="receiver" placeholder="Enter receiver address" maxlength="42"></input>
             <button id="addReceiver" onclick="loadAddReceiver()" class="action-btn">Estimate costs</button>
@@ -208,28 +275,29 @@
       </br>
 
       <div class="action-wrapper" id="security-cat">
-        <h2>Security</h2>
+        <h2>Secure</h2>
         <label class="action-label"><strong>Encrypt keystore</strong>
           <input id="password" readonly="true" placeholder="Click to show password" onclick="loadPassword()"></input>
           <form action="/pages/encrypt" method="GET" class="action-form">
             <button id="encrypt" onclick="loadEncrypt()" class="action-btn">Create keystore</button>
           </form>
-        <label class="action-label"><strong>Change password</strong>
-          <form action="/pages/addpassword" method="POST" class="action-form">
-            <input id="newPassword" name="newPassword" placeholder="Enter keystore pass"></input>
-            <button id="addPassword" onclick="loadAddPassword()" class="action-btn">Set password</button>
-          </form>
-          <button id="reloadAddPassword" onclick="location.reload()" class="reload-btn">Unlock input</button>
-        </label>
-        <label class="action-label"><strong>Decrypt keystore</strong>
-          <input id="keystore" readonly="true" value="./dls/encryptedKeyStore" onclick="loadKeystore()"></input>
-          <form action="/pages/decrypt" method="GET" class="action-form">
-            <button id="decrypt" onclick="loadDecrypt()" class="action-btn">Decrypt keystore</button>
-          </form>
-        </label>
+          <label class="action-label"><strong>Change password</strong>
+            <form action="/pages/addpassword" method="POST" class="action-form">
+              <input id="newPassword" name="newPassword" placeholder="Enter keystore pass"></input>
+              <button id="addPassword" onclick="loadAddPassword()" class="action-btn">Set password</button>
+            </form>
+            <button id="reloadAddPassword" onclick="location.reload()" class="reload-btn">Unlock input</button>
+          </label>
+          <label class="action-label"><strong>Decrypt keystore</strong>
+            <input id="keystore" readonly="true" value="./dls/encryptedKeyStore" onclick="loadKeystore()"></input>
+            <form action="/pages/decrypt" method="GET" class="action-form">
+              <button id="decrypt" onclick="loadDecrypt()" class="action-btn">Decrypt keystore</button>
+            </form>
+          </label>
 
       </div>
 
     </div>
 </body>
+
 </html>
