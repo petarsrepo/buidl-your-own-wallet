@@ -2,15 +2,13 @@ const Web3 = require("web3")
 const fs = require("fs")
 require("dotenv").config()
 const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
-  var test = process.env.PRIVATE_KEY_PASS
+
 // prepare output
 async function decrypt() {
-  // var test = JSON.parse(fs.readFileSync("./dls/newpassword.json", 'utf8')).password
-
-  console.log(test);
+  var pass = JSON.parse(fs.readFileSync("./dls/newpassword.json", 'utf8')).password || process.env.PRIVATE_KEY_PASS
     var decryptedJsonKey = await web3.eth.accounts.decrypt(
         JSON.parse(fs.readFileSync("./dls/encryptedKeyStore.json")),
-        test
+        pass
     )
     console.log(decryptedJsonKey)
 

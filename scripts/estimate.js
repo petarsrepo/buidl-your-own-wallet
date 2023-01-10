@@ -7,6 +7,8 @@ const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 const gasEstimate = async () => {
 const address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey).address;
 const receiver = fs.readFileSync("./dls/receiver.json", 'utf8')
+
+// validate receiver input
 var valid = web3.utils.isHexStrict(receiver);
 if (valid === true) {
 const estimate = await web3.eth.estimateGas({

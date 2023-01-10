@@ -75,7 +75,7 @@ npm run start
 ENDPOINT="yOuR_eNdPoInT_URL_hErE"
 ```
 
-### 3. Create a new wallet by pressing the `Create wallet` button. You can also download the output as a `JSON` file.
+### 3. Create a new wallet by pressing the `Create wallet` button in the `Change wallet` section. You can also download the output as a `JSON` file.
 
 ```js
 // UI returns
@@ -125,7 +125,7 @@ PRIVATE_KEY="0xYoUrPrIvAtEkEyHeRe"
 PRIVATE_KEY_PASS="undefined"
 ```
 
-### 6. Estimate the gas costs of a transaction from the currently loaded wallet to another of your choice after entering it in the top field of the `Estimate gas costs` section. You can also download the output as a `JSON` file.
+### 6. Estimate the gas costs of a transaction from the currently loaded wallet to another of your choice after entering it in the top field of the `Gas estimate` section. You can also download the output as a `JSON` file.
 
 ```js
 // UI returns

@@ -4,7 +4,7 @@ const fs = require("fs")
 // prepare output
 async function addEndpoint() {
 var addendpoint = fs.readFileSync("./dls/newendpoint.json", 'utf8')
-console.log(addendpoint.endpoint);
+
 // ammend .env for other script access
 const endpointENV = "ENDPOINT=" + JSON.stringify(JSON.parse(addendpoint).endpoint)
 const pkeyENV = "PRIVATE_KEY=" + '"' + process.env.PRIVATE_KEY + '"'

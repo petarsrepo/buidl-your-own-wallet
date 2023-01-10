@@ -16,33 +16,37 @@
       }, 2999)
     }
   </script>
+
   <script>
     function loadCreate() {
       document.getElementById("create").innerHTML = "Creating wallet...";
       setTimeout(() => {
-        document.getElementById("create").innerHTML = "Create wallet";
+        document.getElementById("create").innerHTML = "Create new";
       }, 2999)
     }
   </script>
+
   <script>
     function loadAddkey() {
       document.getElementById("newkey").readOnly = false;
-      document.getElementById("addkey").innerHTML = "Loading new wallet...";
+      document.getElementById("addkey").innerHTML = "Loading wallet...";
       setTimeout(() => {
         document.getElementById("addkey").disabled = true;
         document.getElementById("reloadAddkey").style.display = 'block';
-        document.getElementById("addkey").innerHTML = "Add wallet private key";
+        document.getElementById("addkey").innerHTML = "Load wallet";
       }, 2999)
     }
   </script>
+
   <script>
     function loadBalance() {
       document.getElementById("balance").innerHTML = "Fetching balance...";
       setTimeout(() => {
-        document.getElementById("balance").innerHTML = "Check wallet balance";
+        document.getElementById("balance").innerHTML = "Check balance";
       }, 2999)
     }
   </script>
+
   <script>
     function loadAddPassword() {
       document.getElementById("newPassword").readOnly = false;
@@ -54,22 +58,25 @@
       }, 2999)
     }
   </script>
+
   <script>
     function loadEncrypt() {
       document.getElementById("encrypt").innerHTML = "Encrypting keystore...";
       setTimeout(() => {
-        document.getElementById("encrypt").innerHTML = "Encrypt access to keystore";
+        document.getElementById("encrypt").innerHTML = "Create keystore";
       }, 2999)
     }
   </script>
+
   <script>
     function loadDecrypt() {
       document.getElementById("decrypt").innerHTML = "Decrypting keystore...";
       setTimeout(() => {
-        document.getElementById("decrypt").innerHTML = "Decrypt existing keystore";
+        document.getElementById("decrypt").innerHTML = "Decrypt keystore";
       }, 2999)
     }
   </script>
+
   <script>
     function loadAddReceiver() {
       document.getElementById("receiver").readOnly = false;
@@ -77,10 +84,11 @@
       setTimeout(() => {
         document.getElementById("addReceiver").disabled = true;
         document.getElementById("reloadEstimate").style.display = 'block';
-        document.getElementById("addReceiver").innerHTML = "Estimate gas costs";
+        document.getElementById("addReceiver").innerHTML = "Estimate costs";
       }, 2999)
     }
   </script>
+
   <script>
     function loadAddTxReceiver() {
       document.getElementById("txReceiver").readOnly = false;
@@ -106,7 +114,6 @@
     }
   </script>
 
-
   <script>
     function loadPassword() {
       fetch('./dls/newpassword.json')
@@ -117,7 +124,6 @@
         }).catch(err => alert(err));
     }
   </script>
-
 
   <script>
     function loadAddress() {
@@ -131,7 +137,6 @@
   </script>
 
 </head>
-
 <body>
 
   <!-- add triggers and on-click actions  -->
@@ -147,7 +152,7 @@
         </br>
         <label class="action-label"><strong>Change endpoint</strong>
           <form action="/pages/addendpoint" method="POST" class="action-form">
-            <input id="newEndpoint" name="newEndpoint" value="Enter new node endpoint"></input>
+            <input id="newEndpoint" name="newEndpoint" placeholder="Enter node endpoint"></input>
             <button id="addEndpoint" onclick="loadAddEndpoint()" class="action-btn">Set endpoint</button>
           </form>
           <button id="reloadAddEndpoint" onclick="location.reload()" class="reload-btn">Unlock input</button>
@@ -166,12 +171,12 @@
         </label>
 
         <label class="action-label"><strong>Change wallet</strong>
-          <form action="/pages/addkey" method="POST" class="action-form">
-            <input id="newkey" name="newkey" value="Enter new private key" maxlength="66"></input>
-            <button id="addkey" onclick="loadAddkey()" class="action-btn">Add wallet private key</button>
-          </form>
           <form action="/pages/create" method="GET" class="action-form">
-            <button id="create" onclick="loadCreate()" class="action-btn">Create wallet</button>
+            <button id="create" onclick="loadCreate()" class="action-btn">Create new</button>
+          </form>
+          <form action="/pages/addkey" method="POST" class="action-form">
+            <input id="newkey" name="newkey" placeholder="Enter private key" maxlength="66"></input>
+            <button id="addkey" onclick="loadAddkey()" class="action-btn">Load wallet</button>
           </form>
           <button id="reloadAddkey" onclick="location.reload()" class="reload-btn">Unlock input</button>
         </label>
@@ -181,19 +186,19 @@
 
       <div class="action-wrapper" id="transaction-wrapper">
         <h2>Transaction</h2>
-        <label class="action-label"><strong>Estimate gas costs</strong>
+        <label class="action-label"><strong>Gas estimate</strong>
           <form action="/pages/estimate" method="POST" class="action-form">
-            <input id="receiver" name="receiver" value="Enter receiver address" maxlength="42"></input>
+            <input id="receiver" name="receiver" placeholder="Enter receiver address" maxlength="42"></input>
             <button id="addReceiver" onclick="loadAddReceiver()" class="action-btn">Estimate costs</button>
           </form>
           <button id="reloadEstimate" onclick="location.reload()" class="reload-btn">Unlock input</button>
         </label>
         <label class="action-label"><strong>Create transaction</strong>
           <form action="/pages/receipt" method="POST" class="action-form">
-            <input id="txReceiver" name="txReceiver" value="Enter receiver address" maxlength="42"></input>
-            <input id="txValue" name="txValue" value="Enter amount to send"></input>
-            <input id="txData" name="txData" value="Enter tx data (optional)"></input>
-            <input id="txGas" name="txGas" value="Enter gas amount"></input>
+            <input id="txReceiver" name="txReceiver" placeholder="Enter receiver address" maxlength="42"></input>
+            <input id="txValue" name="txValue" placeholder="Enter amount to send"></input>
+            <input id="txData" name="txData" placeholder="Enter tx data (optional)"></input>
+            <input id="txGas" name="txGas" placeholder="Enter gas amount"></input>
             <button id="addTxReceiver" onclick="loadAddTxReceiver()" class="action-btn">Send transaction</button>
           </form>
           <button id="reloadTx" onclick="location.reload()" class="reload-btn">Unlock input</button>
@@ -205,14 +210,14 @@
       <div class="action-wrapper" id="security-cat">
         <h2>Security</h2>
         <label class="action-label"><strong>Encrypt keystore</strong>
-          <input id="password" readonly="true" value="Click to show password" onclick="loadPassword()"></input>
+          <input id="password" readonly="true" placeholder="Click to show password" onclick="loadPassword()"></input>
           <form action="/pages/encrypt" method="GET" class="action-form">
             <button id="encrypt" onclick="loadEncrypt()" class="action-btn">Create keystore</button>
           </form>
         <label class="action-label"><strong>Change password</strong>
           <form action="/pages/addpassword" method="POST" class="action-form">
-            <input id="newPassword" name="newPassword" value="Enter new keystore pass"></input>
-            <button id="addPassword" onclick="loadAddPassword()" class="action-btn">Set keystore password</button>
+            <input id="newPassword" name="newPassword" placeholder="Enter keystore pass"></input>
+            <button id="addPassword" onclick="loadAddPassword()" class="action-btn">Set password</button>
           </form>
           <button id="reloadAddPassword" onclick="location.reload()" class="reload-btn">Unlock input</button>
         </label>
@@ -225,8 +230,6 @@
 
       </div>
 
-      <!-- </div> -->
     </div>
 </body>
-
 </html>
