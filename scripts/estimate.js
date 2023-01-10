@@ -4,12 +4,13 @@ const fs = require("fs")
 let web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 // prepare output
-let gasEstimate = async () => {
 let address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey || process.env.PRIVATE_KEY).address;
-let receiver = fs.readFileSync("./dls/receiver.json", 'utf8')
+let receiver = JSON.parse(fs.readFileSync("./dls/estimate.json", 'utf8')).to
+
+let gasEstimate = async () => {
 
 // validate receiver input
-let valid = web3.utils.isHexStrict(receiver);
+let valid = web3.utils.isAddress(receiver);
 if (valid === true) {
 let estimate = await web3.eth.estimateGas({
     to: receiver

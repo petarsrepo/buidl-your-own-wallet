@@ -5,22 +5,23 @@ let web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 // prepare output
 let address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey || process.env.PRIVATE_KEY).address;
-
-let sendTx = async () => {
-let receiver = fs.readFileSync("./dls/receiver.json", 'utf8')
+let receiver = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).to
 let txValue = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).value
 let txDataIn = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).data
 let txGas = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).gas
+let txData;
+
+let sendTx = async () => {
 
 // validate receiver and data input
-let txData;
+
 let validData = web3.utils.isHexStrict(txDataIn)
 if (validData === true) {
   txData = txDataIn
 } else {
-  txData = ""
+  txData = "0x"
 }
-let valid = web3.utils.isHexStrict(receiver);
+let valid = web3.utils.isAddress(receiver);
 if (valid === true) {
 
 // set transaction parameters
@@ -44,7 +45,6 @@ fs.writeFileSync("./dls/receipt.json", JSON.stringify({
   hash: receipt
 }));
 });
-
 } else {
 
 // pass error if input is ivalid

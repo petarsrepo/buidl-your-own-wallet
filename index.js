@@ -83,7 +83,7 @@ setTimeout(() => {
 // setup transaction gas cost estimation
 app.all('/pages/estimate', (req, res) => {
 
-  fs.writeFileSync("./dls/receiver.json", req.body.receiver);
+  fs.writeFileSync("./dls/estimate.json", '{"to":"' + req.body.receiver + '"}');
   spawn('node', ['scripts/estimate.js']);
 setTimeout(() => {
     res.sendFile('pages/estimate.html', {root: __dirname});
@@ -93,8 +93,9 @@ setTimeout(() => {
 // setup add private key action
 app.all('/pages/receipt', (req, res) => {
 
-  fs.writeFileSync("./dls/receiver.json", req.body.txReceiver);
+  // fs.writeFileSync("./dls/receiver.json", '{"to":"' + req.body.txReceiver + '"}');
   fs.writeFileSync("./dls/txdetails.json", JSON.stringify({
+    "to": req.body.txReceiver,
     "value": req.body.txValue,
     "data": req.body.txData,
     "gas": req.body.txGas
