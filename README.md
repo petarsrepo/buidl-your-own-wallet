@@ -13,6 +13,7 @@ A compilation of scripts to perform basic Web3 wallet management functions withi
 
 ## Overview
 The current implementation supports the following functions:
+
 ✅ Submit transactions  
 ✅ Create a new wallet  
 ✅ Estimate gas costs  
