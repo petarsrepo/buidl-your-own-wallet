@@ -13,22 +13,22 @@ A compilation of scripts to perform basic Web3 wallet management functions withi
 
 ## Overview
 The current implementation supports the following functions:
-✅ Submit transactions
-✅ Create a new wallet
-✅ Estimate gas costs
-✅ Check wallet balance
-✅ Load external wallet from private key
-✅ Encrypt private key to JSON keystore
-✅ Decrypt JSON keystore to private key
-✅ Set custom JSON keystore password
-✅ Download every function output as JSON
+✅ Submit transactions  
+✅ Create a new wallet  
+✅ Estimate gas costs  
+✅ Check wallet balance  
+✅ Load external wallet from private key  
+✅ Encrypt private key to JSON keystore  
+✅ Decrypt JSON keystore to private key  
+✅ Set custom JSON keystore password  
+✅ Download every function output as JSON  
 
 ### ___`Coming soon`___
-📅 Transaction history
-📅 Keystore file import
-📅 Sign transactions
-📅 Multi-wallet support
-📅 Network selection
+📅 Transaction history  
+📅 Keystore file import  
+📅 Sign transactions  
+📅 Multi-wallet support  
+📅 Network selection  
 
 ## 🚨!DISCLAIMER!🚨
 >THIS WALLET DOES NOT COME WITH ROBUST SECURITY FEATURES AND USING IT OUTSIDE A TESTING OR DEVELOPMENT ENVIRONMENT IS STRONGLY DISCOURAGED. BY USING THIS WALLET YOU AGREE IT IS PROVIDED TO YOU WITHOUT WARRANTY AND IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, ARISING FROM YOUR INTERACTIONS WITH IT
@@ -207,8 +207,8 @@ This will be reflected in the generated `/dls/decryptedKeyStore.json` file
 ```
 
 ### 11. ___`Coming soon`___
-📅 Transaction history
-📅 Keystore file import
-📅 Sign transactions
-📅 Multi-wallet support
-📅 Network selection
+📅 Transaction history  
+📅 Keystore file import  
+📅 Sign transactions  
+📅 Multi-wallet support  
+📅 Network selection  
