@@ -3,13 +3,13 @@ const fs = require("fs")
 
 // prepare output
 async function addPass() {
-var addpassword = fs.readFileSync("./dls/newpassword.json", 'utf8')
+let addpassword = fs.readFileSync("./dls/newpassword.json", 'utf8') || process.env.PRIVATE_KEY_PASS
 
 // ammend .env for other script access
-const endpointENV = "ENDPOINT=" + '"' + process.env.ENDPOINT + '"'
-const pkeyENV = "PRIVATE_KEY=" + '"' + process.env.PRIVATE_KEY + '"'
-const pkeypassENV = "PRIVATE_KEY_PASS=" + JSON.stringify(JSON.parse(addpassword).password)
-const changesENV = endpointENV + "\n" + pkeyENV + "\n" + pkeypassENV
+let endpointENV = "ENDPOINT=" + '"' + process.env.ENDPOINT + '"'
+let pkeyENV = "PRIVATE_KEY=" + '"' + process.env.PRIVATE_KEY + '"'
+let pkeypassENV = "PRIVATE_KEY_PASS=" + JSON.stringify(JSON.parse(addpassword).password)
+let changesENV = endpointENV + "\n" + pkeyENV + "\n" + pkeypassENV
 fs.writeFileSync("./.env", changesENV)
 
 // write as page for web viewing

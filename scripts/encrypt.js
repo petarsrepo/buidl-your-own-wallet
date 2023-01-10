@@ -1,14 +1,16 @@
 const Web3 = require("web3")
 const fs = require("fs")
 require("dotenv").config()
-const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
+let web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 // prepare output
+let pkey = JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey || process.env.PRIVATE_KEY
+let pass = JSON.parse(fs.readFileSync("./dls/newpassword.json", 'utf8')).password || process.env.PRIVATE_KEY_PASS
+
 async function encrypt() {
-    const wallet = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey)
-    const encryptedJsonKey = await wallet.encrypt(
-        process.env.PRIVATE_KEY_PASS,
-        wallet.privateKey
+    let encryptedJsonKey = await web3.eth.accounts.encrypt(
+        pkey,
+        pass
     )
 
     // write as JSON for download

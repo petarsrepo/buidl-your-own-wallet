@@ -1,17 +1,17 @@
-var Web3 = require('web3');
+const Web3 = require('web3');
 require("dotenv").config()
 const fs = require("fs")
-const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
+let web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 // prepare output
-const gasEstimate = async () => {
-const address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey).address;
-const receiver = fs.readFileSync("./dls/receiver.json", 'utf8')
+let gasEstimate = async () => {
+let address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey || process.env.PRIVATE_KEY).address;
+let receiver = fs.readFileSync("./dls/receiver.json", 'utf8')
 
 // validate receiver input
-var valid = web3.utils.isHexStrict(receiver);
+let valid = web3.utils.isHexStrict(receiver);
 if (valid === true) {
-const estimate = await web3.eth.estimateGas({
+let estimate = await web3.eth.estimateGas({
     to: receiver
 });
 

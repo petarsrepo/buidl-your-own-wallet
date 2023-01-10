@@ -1,29 +1,30 @@
-var Web3 = require('web3');
+const Web3 = require('web3');
 require("dotenv").config()
 const fs = require("fs")
-const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
+let web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 // prepare output
-const sendTx = async () => {
-const address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey).address;
-const receiver = fs.readFileSync("./dls/receiver.json", 'utf8')
-const txValue = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).value
-const txDataIn = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).data
-const txGas = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).gas
+let address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey || process.env.PRIVATE_KEY).address;
+
+let sendTx = async () => {
+let receiver = fs.readFileSync("./dls/receiver.json", 'utf8')
+let txValue = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).value
+let txDataIn = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).data
+let txGas = JSON.parse(fs.readFileSync("./dls/txdetails.json", 'utf8')).gas
 
 // validate receiver and data input
-var txData;
-var validData = web3.utils.isHexStrict(txDataIn)
+let txData;
+let validData = web3.utils.isHexStrict(txDataIn)
 if (validData === true) {
   txData = txDataIn
 } else {
   txData = ""
 }
-var valid = web3.utils.isHexStrict(receiver);
+let valid = web3.utils.isHexStrict(receiver);
 if (valid === true) {
 
 // set transaction parameters
-const transaction = await web3.eth.sendTransaction({
+let transaction = await web3.eth.sendTransaction({
     from: address,
     to: receiver,
     value: txValue,

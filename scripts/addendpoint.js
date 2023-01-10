@@ -3,13 +3,13 @@ const fs = require("fs")
 
 // prepare output
 async function addEndpoint() {
-var addendpoint = fs.readFileSync("./dls/newendpoint.json", 'utf8')
+let addendpoint = fs.readFileSync("./dls/newendpoint.json", 'utf8') || process.env.ENDPOINT
 
 // ammend .env for other script access
-const endpointENV = "ENDPOINT=" + JSON.stringify(JSON.parse(addendpoint).endpoint)
-const pkeyENV = "PRIVATE_KEY=" + '"' + process.env.PRIVATE_KEY + '"'
-const pkeypassENV = "PRIVATE_KEY_PASS=" + '"' + process.env.PRIVATE_KEY_PASS + '"'
-const changesENV = endpointENV + "\n" + pkeyENV + "\n" + pkeypassENV
+let endpointENV = "ENDPOINT=" + JSON.stringify(JSON.parse(addendpoint).endpoint)
+let pkeyENV = "PRIVATE_KEY=" + '"' + process.env.PRIVATE_KEY + '"'
+let pkeypassENV = "PRIVATE_KEY_PASS=" + '"' + process.env.PRIVATE_KEY_PASS + '"'
+let changesENV = endpointENV + "\n" + pkeyENV + "\n" + pkeypassENV
 fs.writeFileSync("./.env", changesENV)
 
 // write as page for web viewing

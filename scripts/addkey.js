@@ -1,20 +1,20 @@
-var Web3 = require('web3');
+const Web3 = require('web3');
 require("dotenv").config()
 const fs = require("fs")
-const web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
+let web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 // prepare output
 async function addKey() {
-var newkey = fs.readFileSync("./dls/newkey.json", 'utf8')
-var valid = web3.utils.isHexStrict(newkey);
+let newkey = fs.readFileSync("./dls/newkey.json", 'utf8') || process.env.PRIVATE_KEY
+let valid = web3.utils.isHexStrict(newkey);
 if (valid === true) {
-const wallet = web3.eth.accounts.wallet.add(newkey)
+let wallet = web3.eth.accounts.wallet.add(newkey)
 
 // ammend .env for other script access
-const endpointENV = "ENDPOINT=" + '"' + process.env.ENDPOINT + '"'
-const pkeyENV = "PRIVATE_KEY=" + '"' + wallet.privateKey + '"'
-const pkeypassENV = "PRIVATE_KEY_PASS=" + '"' + process.env.PRIVATE_KEY_PASS + '"'
-const changesENV = endpointENV + "\n" + pkeyENV + "\n" + pkeypassENV
+let endpointENV = "ENDPOINT=" + '"' + process.env.ENDPOINT + '"'
+let pkeyENV = "PRIVATE_KEY=" + '"' + wallet.privateKey + '"'
+let pkeypassENV = "PRIVATE_KEY_PASS=" + '"' + process.env.PRIVATE_KEY_PASS + '"'
+let changesENV = endpointENV + "\n" + pkeyENV + "\n" + pkeypassENV
 fs.writeFileSync("./.env", changesENV)
 
 // write as page for web viewing
