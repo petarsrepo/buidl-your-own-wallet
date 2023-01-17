@@ -5,8 +5,8 @@ let web3 = new Web3(Web3.givenProvider || process.env.ENDPOINT);
 
 // prepare output
 let address = web3.eth.accounts.wallet.add(JSON.parse(fs.readFileSync('./dls/keys.json', 'utf8')).privateKey || process.env.PRIVATE_KEY).address;
-let receiver = JSON.parse(fs.readFileSync("./dls/estimate.json", 'utf8')).to
-
+let receiver = JSON.parse(fs.readFileSync("./dls/estimate.json", 'utf8')).receiver
+console.log(receiver);
 let gasEstimate = async () => {
 
 // validate receiver input
@@ -15,7 +15,7 @@ if (valid === true) {
 let estimate = await web3.eth.estimateGas({
     to: receiver
 });
-
+console.log(JSON.stringify(estimate));
 // write as page for web viewing
 fs.writeFileSync("./pages/estimate.html", 'Estimate gas cost from: ' + address + ' to: ' + receiver + ' is: ' + JSON.stringify(estimate) + '<form action="../dls/estimate.json" method="GET">' + '<button id="estimateDL" onclick="loadEstimateDL()">Download</button>' + '</form>' + '<button id="returnHome" onclick="window.location = `/`">Return home</button>');
 
