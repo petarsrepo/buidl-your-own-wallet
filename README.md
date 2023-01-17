@@ -37,9 +37,9 @@ The current implementation supports the following functions:
 
 ## Prerequisites
 
-👉 [Node.js](https://nodejs.org/en/)
-👉 [Web3.js (installed automatically during initial setup)](https://github.com/web3/web3.js)
-👉 [Dotenv (installed automatically during initial setup)](https://github.com/motdotla/dotenv)
+👉 [Node.js](https://nodejs.org/en/)  
+👉 [Web3.js (installed automatically during initial setup)](https://github.com/web3/web3.js)  
+👉 [Dotenv (installed automatically during initial setup)](https://github.com/motdotla/dotenv)  
 
 ## Initial setup
 
