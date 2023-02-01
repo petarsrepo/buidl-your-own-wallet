@@ -106,6 +106,11 @@ setTimeout(() => {
       }, 3000)
 })
 
+// setup logo download
+app.get('/buidl-yow-logo.png', (req, res) => {
+res.download('buidl-yow-logo.png')
+});
+
 // setup new endpoint download
 app.get('/dls/newendpoint.json', (req, res) => {
 res.download('dls/newendpoint.json')

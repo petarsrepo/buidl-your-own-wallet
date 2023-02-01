@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- <link href="css/output.css" rel="stylesheet"> -->
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 
   <script>
@@ -208,95 +209,125 @@
 </head>
 <!-- add triggers and on-click actions  -->
 
-<body onload="loadVitals()">
-  <div class="wrapper">
-    <h1>BUIDL Y(OUR) O(WN) WALLET</h1>
-    <div class="vitals">
-      <label class="action-label" style="padding-left: 5px; padding-right:5px"><strong>Node endpoint</strong>
-        <input class="vitals-txt" id="endpoint" readonly="true" value="Get a free endpoint on click here or set it below..." onclick="loadConsole()" onmouseover="loadEndpointTip()" onmouseout="loadVitals()"></input>
-        </br>
-        <label class="action-label" style="padding-left: 5px; padding-right:5px"><strong id="wallet-label">Wallet address</strong>
-          <input class="vitals-txt" id="address" readonly="true" value="Create a new wallet or add an existing address..." onclick="loadWalletCopy()" onmouseover="loadWalletTip()" onmouseout="loadWalletLabel()"></input>
+<body onload="loadVitals()" >
+  <div class="wrapper" style="
+    margin: 0.5% auto;
+    padding: 0.5% 5%;
+    border-radius: 3%;
+    border-style: outset;
+    --tw-drop-shadow: 1 1 cornsilk;
+    filter: drop-shadow(22px 33px 22px rgb(0 0 0 / 0.55));
+    border-color: currentColor;
+    background-color: rgba(255,255,255,0.77)!important;
+}">
+    <!-- <h1 class="text-3xl font-bold underline" style="margin-bottom: 3%">BUIDL YOUR OWN WALLET</h1> -->
+
+    <div class="vitals" style="width: -webkit-fill-available;">
+          <img src="/buidl-yow-logo.png" style="
+          width: 40rem;
+          margin: auto;
+          "></img>
+      <label class="action-label text-l font-bold" style="padding-left: 5px; padding-right:5px"><strong style="font-weight: bold; font-size: larger!important">Node endpoint</strong>
+        <input class="vitals-txt border-solid border-2 text-input border rounded p-1 border-slate-500/75" style="margin-bottom:3%!important" id="endpoint" readonly="true" value="Get a free endpoint on click here or set it below..." onclick="loadConsole()" onmouseover="loadEndpointTip()" onmouseout="loadVitals()"></input>
+
+        <label class="action-label text-l font-bold" style="padding-left: 5px; padding-right:5px"><strong style="font-weight: bold; font-size: larger!important" id="wallet-label">Wallet address</strong>
+          <input class="vitals-txt border-solid border-2 text-input border rounded p-1 border-slate-500/75" style="margin-bottom:3%!important" id="address" readonly="true" value="Create a new wallet or add an existing address..." onclick="loadWalletCopy()" onmouseover="loadWalletTip()" onmouseout="loadWalletLabel()"></input>
         </label>
-        </br>
-        <label class="action-label" style="padding-left: 5px; padding-right:5px"><strong>Latest balance</strong>
-          <input class="vitals-txt" id="balance" readonly="true" value="Load wallet to get balance & send transactions..." onclick="loadExplorer()" onmouseover="loadBalanceTip()" onmouseout="loadVitals()"></input>
+        <label class="action-label text-l font-bold" style="padding-left: 5px; padding-right:5px"><strong style="font-weight: bold; font-size: larger!important">Latest balance</strong>
+          <input class="vitals-txt border-solid border-2 text-input border rounded p-1 border-slate-500/75" style="margin-bottom:3%!important" id="balance" readonly="true" value="Load wallet to get balance & send transactions..." onclick="loadExplorer()" onmouseover="loadBalanceTip()" onmouseout="loadVitals()"></input>
         </label>
     </div>
     <div class="actions">
 
       <div class="action-wrapper" id="endpoint-cat">
         <h2>Manage</h2>
-        <label class="action-label"><strong>Access wallets</strong>
-          <form action="/pages/balance" method="GET" class="action-form">
-            <button id="getBalance" onclick="loadGetBalance()" class="action-btn">Print balance</button>
+          <label class="action-label text-l font-bold text-l font-bold" ><strong class="!text-base">Access wallets</strong>
+          <form action="/pages/create" method="GET" class="action-form" style="margin-bottom: 3%!important">
+            <button id="create" onclick="loadCreate()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Create new</button>
           </form>
-          <form action="/pages/create" method="GET" class="action-form">
-            <button id="create" onclick="loadCreate()" class="action-btn">Create new</button>
-          </form>
+
           <form action="/pages/addkey" method="POST" class="action-form">
-            <input id="newkey" name="newkey" placeholder="Enter private key" maxlength="66"></input>
-            <button id="addkey" onclick="loadAddkey()" class="action-btn">Load wallet</button>
+            <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="newkey" name="newkey" placeholder="Enter private key" maxlength="66"></input>
+            <button id="addkey" onclick="loadAddkey()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Load wallet</button>
           </form>
           <button id="reloadAddkey" onclick="location.reload()" class="reload-btn">Unlock input</button>
+          <label class="action-label text-l font-bold text-l font-bold"><strong class="!text-base">Update assets</strong>
+            <form action="/pages/balance" method="GET" class="action-form" >
+              <button id="getBalance" onclick="loadGetBalance()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Print balance</button>
+            </form>
+                              </label>
         </label>
-        <label class="action-label"><strong>Change endpoint</strong>
-          <form action="/pages/addendpoint" method="POST" class="action-form">
-            <input id="newEndpoint" name="newEndpoint" placeholder="Enter node endpoint"></input>
-            <button id="addEndpoint" onclick="loadAddEndpoint()" class="action-btn">Set endpoint</button>
-          </form>
-          <button id="reloadAddEndpoint" onclick="location.reload()" class="reload-btn">Unlock input</button>
-        </label>
+
       </div>
 
       </br>
 
       <div class="action-wrapper" id="transaction-wrapper">
-        <h2>Transact</h2>
-        <label class="action-label"><strong>Estimate gas</strong>
-          <form action="/pages/estimate" method="POST" class="action-form">
-            <input id="receiver" name="receiver" placeholder="Enter receiver address" maxlength="42"></input>
-            <button id="addReceiver" onclick="loadAddReceiver()" class="action-btn">Estimate costs</button>
-          </form>
-          <button id="reloadEstimate" onclick="location.reload()" class="reload-btn">Unlock input</button>
-        </label>
-        <label class="action-label"><strong>Create transaction</strong>
+        <h2>Execute</h2>
+        <label class="action-label text-l font-bold"><strong class="!text-base">Create transaction</strong>
           <form action="/pages/receipt" method="POST" class="action-form">
-            <input id="txReceiver" name="txReceiver" placeholder="Enter receiver address" maxlength="42"></input>
-            <input id="txValue" name="txValue" placeholder="Enter amount to send"></input>
-            <input id="txData" name="txData" placeholder="Enter tx data (optional)"></input>
-            <input id="txGas" name="txGas" placeholder="Enter gas amount"></input>
-            <button id="addTxReceiver" onclick="loadAddTxReceiver()" class="action-btn">Send transaction</button>
+            <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="txReceiver" name="txReceiver" placeholder="Enter receiver address" maxlength="42"></input>
+            <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="txValue" name="txValue" placeholder="Enter amount to send"></input>
+            <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="txData" name="txData" placeholder="Enter tx data (optional)"></input>
+            <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="txGas" name="txGas" placeholder="Enter gas amount"></input>
+            <button id="addTxReceiver" onclick="loadAddTxReceiver()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Send transaction</button>
           </form>
           <button id="reloadTx" onclick="location.reload()" class="reload-btn">Unlock input</button>
         </label>
+
       </div>
 
       </br>
 
       <div class="action-wrapper" id="security-cat">
-        <h2>Secure</h2>
-        <label class="action-label"><strong>Encrypt keystore</strong>
-          <input id="password" readonly="true" placeholder="Click to show password" onclick="loadPassword()"></input>
+        <h2>Protect</h2>
+        <label class="action-label text-l font-bold"><strong class="text-base">Encrypt keystore</strong>
+          <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="password" readonly="true" placeholder="Click to show password" onclick="loadPassword()"></input>
           <form action="/pages/encrypt" method="GET" class="action-form">
-            <button id="encrypt" onclick="loadEncrypt()" class="action-btn">Create keystore</button>
+            <button id="encrypt" onclick="loadEncrypt()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Create keystore</button>
           </form>
-          <label class="action-label"><strong>Change password</strong>
-            <form action="/pages/addpassword" method="POST" class="action-form">
-              <input id="newPassword" name="newPassword" placeholder="Enter keystore pass"></input>
-              <button id="addPassword" onclick="loadAddPassword()" class="action-btn">Set password</button>
-            </form>
-            <button id="reloadAddPassword" onclick="location.reload()" class="reload-btn">Unlock input</button>
-          </label>
-          <label class="action-label"><strong>Decrypt keystore</strong>
-            <input id="keystore" readonly="true" value="./dls/encryptedKeyStore" onclick="loadKeystore()"></input>
+
+          <label class="action-label text-l font-bold "><strong class="!text-base">Decrypt keystore</strong>
+            <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="keystore" readonly="true" value="./dls/encryptedKeyStore" onclick="loadKeystore()"></input>
             <form action="/pages/decrypt" method="GET" class="action-form">
-              <button id="decrypt" onclick="loadDecrypt()" class="action-btn">Decrypt keystore</button>
+              <button id="decrypt" onclick="loadDecrypt()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Decrypt keystore</button>
             </form>
           </label>
 
       </div>
 
+
+    </div>
+    <div class="flex flex-row flex-wrap items center">
+
+      <div>
+<label class="action-label text-l font-bold"><strong class="!text-base">Change endpoint</strong>
+<form action="/pages/addendpoint" method="POST" class="action-form">
+  <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="newEndpoint" name="newEndpoint" placeholder="Enter node endpoint"></input>
+  <button id="addEndpoint" onclick="loadAddEndpoint()" class="action-btn border border-solid rounded p-1 border-3 border-slate-500/75">Set endpoint</button>
+</form>
+<button id="reloadAddEndpoint" onclick="location.reload()" class="reload-btn">Unlock input</button>
+</label>
+  </div>
+          <div>
+          <label class="action-label text-l font-bold" style="margin-left: 3%; margin-right: 3%"><strong class="!text-base">Estimate gas</strong>
+            <form action="/pages/estimate" method="POST" class="action-form">
+              <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="receiver" name="receiver" placeholder="Enter receiver address" maxlength="42"></input>
+              <button id="addReceiver" onclick="loadAddReceiver()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Estimate costs</button>
+            </form>
+            <button id="reloadEstimate" onclick="location.reload()" class="reload-btn">Unlock input</button>
+          </label>
+        </div>
+
+          <div >
+        <label class="action-label text-l font-bold " ><strong class="!text-base">Change password</strong>
+          <form action="/pages/addpassword" method="POST" class="action-form ">
+            <input class="text-input border !text-xs border-solid rounded p-1 border-3 border-slate-500/75" id="newPassword" name="newPassword" placeholder="Enter keystore pass"></input>
+            <button id="addPassword" onclick="loadAddPassword()" class="action-btn  border border-solid rounded p-1 border-3 border-slate-500/75">Set password</button>
+          </form>
+          <button id="reloadAddPassword" onclick="location.reload()" class="reload-btn">Unlock input</button>
+        </label>
+            </div>
     </div>
 </body>
 
