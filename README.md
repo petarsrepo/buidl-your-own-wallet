@@ -1,4 +1,4 @@
-# ___`BUIDL your own wallet`___
+# ___`BUIDL your own wallet`___ [![using with dotenv-vault](https://badge.dotenv.org/using.svg?r=1)](https://www.dotenv.org/r/github.com/motdotla/dotenv?r=1)
 
 A compilation of scripts to perform basic Web3 wallet management functions within a single interface. Create a wallet, check its balance, submit transactions, estimate gas costs, encrypt your private key to JSON keystore, and decrypt your JSON keystore to private key. Here are some quick demo walkthroughs of some of the core functionalities:
 
